@@ -1,0 +1,6 @@
+main: io.th0rgal.guardian.GuardianPlugin
+name: GuardianPlugin
+version: ${version}
+author: Th0rgal
+api-version: "1.16"
+depend: [ ProtocolLib ]

@@ -1,0 +1,15 @@
+[example]
+
+[[action]]
+threshold = 10
+alert = "{user} is suspicious"
+
+[[action]]
+threshold = 50
+alert = "{player} has an extremely suspicious behavior"
+
+[[action]]
+threshold = 100
+commands = [
+    "ban {player} 'You have been automatically banned for cheating'"
+]
