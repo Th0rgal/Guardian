@@ -26,6 +26,10 @@ public class PlayersManager implements Listener {
         return players.get(uuid);
     }
 
+    public GuardianPlayer getPlayer(Player player) {
+        return getPlayer(player.getUniqueId());
+    }
+
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
     public void onPlayerJoin(final PlayerJoinEvent event) {
         Player player = event.getPlayer();

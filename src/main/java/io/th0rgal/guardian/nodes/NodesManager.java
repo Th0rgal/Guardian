@@ -2,8 +2,9 @@ package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.NodeConfig;
+import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.exceptions.ExceptionHandler;
-import io.th0rgal.guardian.nodes.provided.HealthBarNode;
+import io.th0rgal.guardian.nodes.render.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.InvocationTargetException;
@@ -14,11 +15,13 @@ public class NodesManager {
 
     private final JavaPlugin plugin;
     private final Configuration nodesConfiguration;
+    private final PlayersManager playersManager;
     private final List<Node> nodes = new ArrayList<>();
 
-    public NodesManager(JavaPlugin plugin, Configuration nodesConfiguration) {
+    public NodesManager(JavaPlugin plugin, Configuration nodesConfiguration, PlayersManager playersManager) {
         this.plugin = plugin;
         this.nodesConfiguration = nodesConfiguration;
+        this.playersManager = playersManager;
         registerNode(HealthBarNode.class, "healthbar");
     }
 
@@ -27,8 +30,8 @@ public class NodesManager {
             NodeConfig nodeConfig = new NodeConfig(nodesConfiguration, name);
             if (nodeConfig.getBoolean("enabled"))
                 nodes.add(nodeClass
-                        .getConstructor(JavaPlugin.class, String.class, NodeConfig.class)
-                        .newInstance(plugin, name, nodeConfig));
+                        .getConstructor(JavaPlugin.class, PlayersManager.class, String.class, NodeConfig.class)
+                        .newInstance(plugin, playersManager, name, nodeConfig));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                 | NoSuchMethodException exception) {
             new ExceptionHandler(exception).fire(this.plugin.getLogger());

@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.nodes.provided;
+package io.th0rgal.guardian.nodes.render;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -7,8 +7,8 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedWatchableObject;
-import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.config.NodeConfig;
+import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -22,8 +22,9 @@ import java.util.Collections;
 
 public class HealthBarNode extends Node implements Listener {
 
-    public HealthBarNode(JavaPlugin plugin, String name, NodeConfig configuration) {
-        super(plugin, name, configuration);
+
+    public HealthBarNode(JavaPlugin plugin, PlayersManager playersManager, String name, NodeConfig configuration) {
+        super(plugin, playersManager, name, configuration);
     }
 
     @Override
@@ -47,7 +48,8 @@ public class HealthBarNode extends Node implements Listener {
                         Player player = event.getPlayer();
                         PacketContainer packet = event.getPacket();
                         Entity entity = packet.getEntityModifier(event).read(0);
-                        if (player == entity
+                        if (isDisabledFor(playersManager.getPlayer(player))
+                                || player == entity
                                 || !(entity instanceof LivingEntity)
                                 || entity instanceof Wither
                                 || entity instanceof EnderDragon
