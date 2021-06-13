@@ -3,15 +3,18 @@ package io.th0rgal.guardian.nodes;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
-import io.th0rgal.guardian.exceptions.ExceptionHandler;
 import io.th0rgal.guardian.nodes.render.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NodesManager {
+
+    @FunctionalInterface
+    interface NodeConstructor {
+        Node create(JavaPlugin plugin, PlayersManager playersManager, String name, NodeConfig config);
+    }
 
     private final JavaPlugin plugin;
     private final Configuration nodesConfiguration;
@@ -22,20 +25,13 @@ public class NodesManager {
         this.plugin = plugin;
         this.nodesConfiguration = nodesConfiguration;
         this.playersManager = playersManager;
-        registerNode(HealthBarNode.class, "healthbar");
+        registerNode(HealthBarNode::new, "healthbar");
     }
 
-    public void registerNode(Class<? extends Node> nodeClass, String name) {
-        try {
-            NodeConfig nodeConfig = new NodeConfig(nodesConfiguration, name);
-            if (nodeConfig.getBoolean("enabled"))
-                nodes.add(nodeClass
-                        .getConstructor(JavaPlugin.class, PlayersManager.class, String.class, NodeConfig.class)
-                        .newInstance(plugin, playersManager, name, nodeConfig));
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException
-                | NoSuchMethodException exception) {
-            new ExceptionHandler(exception).fire(this.plugin.getLogger());
-        }
+    public void registerNode(NodeConstructor nodeCreator, String name) {
+        NodeConfig config = new NodeConfig(nodesConfiguration, name);
+        if (config.getBoolean("enabled"))
+            nodes.add(nodeCreator.create(plugin, playersManager, name, config));
     }
 
     public void enableAll() {
