@@ -20,6 +20,8 @@ public class PlayersManager implements Listener {
 
     public PlayersManager(JavaPlugin plugin) {
         Bukkit.getPluginManager().registerEvents(this, plugin);
+        for (Player player : Bukkit.getOnlinePlayers())
+            players.put(player.getUniqueId(), new GuardianPlayer(player));
     }
 
     public GuardianPlayer getPlayer(UUID uuid) {

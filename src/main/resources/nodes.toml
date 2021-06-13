@@ -1,3 +1,7 @@
+# Combat
+[highcps]
+enabled = true
+
 # Render
 [healthbar]
 enabled = true

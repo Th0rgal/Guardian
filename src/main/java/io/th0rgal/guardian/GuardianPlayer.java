@@ -11,7 +11,7 @@ public class GuardianPlayer {
 
     private final Player player;
     private final HashSet<Class<? extends Node>> disabledNodes;
-    private final Map<Class<? extends Node>, Record> data;
+    private final Map<Class<? extends Node>, Object> data;
 
     public GuardianPlayer(Player player) {
         this.player = player;
@@ -35,12 +35,12 @@ public class GuardianPlayer {
         return player;
     }
 
-    public Record getData(Class<? extends Node> nodeClass) {
+    public Object getData(Class<? extends Node> nodeClass) {
         return data.get(nodeClass);
     }
 
-    public Record setData(Class<? extends Node> nodeClass) {
-        return data.get(nodeClass);
+    public void setData(Class<? extends Node> nodeClass, Object nodeData) {
+        data.put(nodeClass, nodeData);
     }
 
 }
