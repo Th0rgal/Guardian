@@ -1,6 +1,7 @@
 package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.config.Configuration;
+import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.exceptions.ExceptionHandler;
 import io.th0rgal.guardian.nodes.provided.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,14 +19,16 @@ public class NodesManager {
     public NodesManager(JavaPlugin plugin, Configuration nodesConfiguration) {
         this.plugin = plugin;
         this.nodesConfiguration = nodesConfiguration;
-        registerNode("healthbar", HealthBarNode.class);
+        registerNode(HealthBarNode.class, "healthbar");
     }
 
-    public void registerNode(String name, Class<? extends Node> nodeClass) {
+    public void registerNode(Class<? extends Node> nodeClass, String name) {
         try {
-            nodes.add(nodeClass
-                    .getConstructor(JavaPlugin.class, String.class)
-                    .newInstance(plugin, name));
+            NodeConfig nodeConfig = new NodeConfig(nodesConfiguration, name);
+            if (nodeConfig.getBoolean("enabled"))
+                nodes.add(nodeClass
+                        .getConstructor(JavaPlugin.class, String.class, NodeConfig.class)
+                        .newInstance(plugin, name, nodeConfig));
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException
                 | NoSuchMethodException exception) {
             new ExceptionHandler(exception).fire(this.plugin.getLogger());

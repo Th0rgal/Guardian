@@ -8,6 +8,7 @@ import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedWatchableObject;
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.nodes.Node;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -20,8 +21,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.Collections;
 
 public class HealthBarNode extends Node implements Listener {
-    public HealthBarNode(JavaPlugin plugin, String name) {
-        super(plugin, name);
+
+    public HealthBarNode(JavaPlugin plugin, String name, NodeConfig configuration) {
+        super(plugin, name, configuration);
     }
 
     @Override
@@ -32,16 +34,6 @@ public class HealthBarNode extends Node implements Listener {
 
     @Override
     public void disable() {
-
-    }
-
-    @Override
-    public void enable(GuardianPlayer player) {
-
-    }
-
-    @Override
-    public void disable(GuardianPlayer player) {
 
     }
 
