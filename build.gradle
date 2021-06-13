@@ -26,6 +26,8 @@ repositories {
 dependencies {
     compileOnly group: "org.spigotmc", name: "spigot", version: "1.16.5-R0.1-SNAPSHOT"
     compileOnly group: "org.spigotmc", name: "spigot-api", version: "1.16.5-R0.1-SNAPSHOT"
+    compileOnly group: "com.github.dmulloy2", name: "ProtocolLib", version: "4.6.0"
+
     implementation 'io.github.xtomlj:xtomlj:1.1.0'
     implementation 'dev.jorel.CommandAPI:commandapi-shade:5.12'
     implementation "net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT"

@@ -1,0 +1,5 @@
+# Render
+[healthbar]
+enabled = true
+    [healthbar.test]
+    yolo = false

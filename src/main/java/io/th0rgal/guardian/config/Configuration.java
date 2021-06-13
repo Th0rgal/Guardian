@@ -11,6 +11,7 @@ import org.tomlj.TomlParseResult;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Set;
 
 public class Configuration {
 
@@ -46,6 +47,10 @@ public class Configuration {
 
     public boolean getBoolean(String entry) {
         return result.getBoolean(entry);
+    }
+
+    public Set<String> getKeys() {
+        return result.keySet();
     }
 
 

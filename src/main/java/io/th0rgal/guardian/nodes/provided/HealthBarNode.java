@@ -1,0 +1,80 @@
+package io.th0rgal.guardian.nodes.provided;
+
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketContainer;
+import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.wrappers.WrappedWatchableObject;
+import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.nodes.Node;
+import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Collections;
+
+public class HealthBarNode extends Node implements Listener {
+    public HealthBarNode(JavaPlugin plugin, String name) {
+        super(plugin, name);
+    }
+
+    @Override
+    public void enable() {
+        registerPackets();
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
+
+    @Override
+    public void disable() {
+
+    }
+
+    @Override
+    public void enable(GuardianPlayer player) {
+
+    }
+
+    @Override
+    public void disable(GuardianPlayer player) {
+
+    }
+
+    private void registerPackets() {
+        ProtocolLibrary.getProtocolManager().addPacketListener(
+                new PacketAdapter(plugin, ListenerPriority.HIGH, PacketType.Play.Server.ENTITY_METADATA) {
+                    @Override
+                    public void onPacketSending(PacketEvent event) {
+                        if (event.isPlayerTemporary())
+                            return;
+                        Player player = event.getPlayer();
+                        PacketContainer packet = event.getPacket();
+                        Entity entity = packet.getEntityModifier(event).read(0);
+                        if (player == entity
+                                || !(entity instanceof LivingEntity)
+                                || entity instanceof Wither
+                                || entity instanceof EnderDragon
+                                || entity.getPassengers().contains(player))
+                            return;
+                        for (WrappedWatchableObject watch : packet.getWatchableCollectionModifier().read(0))
+                            if (watch.getIndex() == 8 && (float) watch.getValue() != 0f)
+                                watch.setValue((float) ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                    }
+                });
+    }
+
+    @EventHandler
+    public void onMount(final VehicleEnterEvent event) {
+        if (!(event.getEntered() instanceof Player))
+            return;
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
+            if (event.getVehicle().isValid() && event.getEntered().isValid())
+                ProtocolLibrary.getProtocolManager().updateEntity(event.getVehicle(), Collections.singletonList((Player) event.getEntered()));
+        });
+    }
+}
