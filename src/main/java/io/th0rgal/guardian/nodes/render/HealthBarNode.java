@@ -22,7 +22,6 @@ import java.util.Collections;
 
 public class HealthBarNode extends Node implements Listener {
 
-
     public HealthBarNode(JavaPlugin plugin, PlayersManager playersManager, String name, NodeConfig configuration) {
         super(plugin, playersManager, name, configuration);
     }
