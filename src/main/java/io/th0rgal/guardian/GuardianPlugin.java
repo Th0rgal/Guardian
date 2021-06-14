@@ -7,6 +7,8 @@ import io.th0rgal.guardian.config.Config;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.config.MainConfig;
+import io.th0rgal.guardian.storage.Database;
+import io.th0rgal.guardian.storage.SQLite;
 import io.th0rgal.guardian.nodes.NodesManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -30,7 +32,10 @@ public class GuardianPlugin extends JavaPlugin {
         new CommandsManager(adventure, lang).register();
         PlayersManager playersManager = new PlayersManager(this);
         new NodesManager(this, new Configuration(this, "nodes"), playersManager).enableAll();
-        new PunishersManager(new Configuration(this, "punishers"));
+        PunishersManager punishers = new PunishersManager(new Configuration(this, "punishers"));
+
+        Database database = new SQLite(this, punishers.getPunishers(), "database");
+        database.load();
     }
 
 }

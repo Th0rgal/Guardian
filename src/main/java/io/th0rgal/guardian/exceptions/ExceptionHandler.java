@@ -11,12 +11,10 @@ public class ExceptionHandler {
     }
 
     public void fire(Logger logger) {
-        if (exception instanceof GuardianException) {
-            GuardianException guardianException = (GuardianException) exception;
+        if (exception instanceof GuardianException guardianException)
             logger.severe("A " + guardianException.getClass() + " was fired. " + guardianException.advice + " Advanced stacktrace:");
-        } else {
+        else
             logger.severe("An unexpected error has occurred. Please contact the developer with this stacktrace :");
-        }
         exception.printStackTrace();
     }
 

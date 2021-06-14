@@ -5,10 +5,7 @@ import io.th0rgal.guardian.config.PunisherAction;
 import org.tomlj.TomlArray;
 import org.tomlj.TomlTable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PunishersManager {
 
@@ -42,6 +39,10 @@ public class PunishersManager {
             if (action.hasCommands())
                 action.getCommands();
         }
+    }
+
+    public Set<String> getPunishers() {
+        return actionsMap.keySet();
     }
 
 }
