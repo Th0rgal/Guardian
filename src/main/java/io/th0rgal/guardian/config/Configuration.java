@@ -4,9 +4,7 @@ import io.th0rgal.guardian.exceptions.ExceptionHandler;
 
 import io.th0rgal.guardian.exceptions.ParsingException;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.tomlj.Toml;
-import org.tomlj.TomlParseError;
-import org.tomlj.TomlParseResult;
+import org.tomlj.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -57,9 +55,16 @@ public class Configuration {
         return result.getBoolean(entry);
     }
 
+    public TomlArray getArray(String entry) {
+        return result.getArray(entry);
+    }
+
+    public TomlTable getTable(String entry) {
+        return result.getTable(entry);
+    }
+
     public Set<String> getKeys() {
         return result.keySet();
     }
-
 
 }

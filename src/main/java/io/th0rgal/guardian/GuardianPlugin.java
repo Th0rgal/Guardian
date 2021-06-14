@@ -30,7 +30,7 @@ public class GuardianPlugin extends JavaPlugin {
         new CommandsManager(adventure, lang).register();
         PlayersManager playersManager = new PlayersManager(this);
         new NodesManager(this, new Configuration(this, "nodes"), playersManager).enableAll();
-        new PunishersManager();
+        new PunishersManager(new Configuration(this, "punishers"));
     }
 
 }

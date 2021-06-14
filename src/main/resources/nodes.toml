@@ -12,7 +12,7 @@ min_cps = 10.0
 [[highcps.punishers]]
 min_cps = 14.0
 punisher = "combat"
-add = 1
+add = 1.0
 
 # RENDER
 

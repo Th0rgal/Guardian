@@ -1,17 +1,17 @@
 [combat]
 
-decrease = 1 # decrease every 5 minutes
+decrease = 1.0 # decrease every 5 minutes
 
 [[combat.action]]
-threshold = 10
+threshold = 10.0
 alert = "{user} is suspicious"
 
 [[combat.action]]
-threshold = 50
+threshold = 50.0
 alert = "{player} has an extremely suspicious behavior"
 
 [[combat.action]]
-threshold = 100
+threshold = 100.0
 commands = [
     "ban {player} 'You have been automatically banned for cheating'"
 ]
