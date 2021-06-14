@@ -21,12 +21,12 @@ final class CPSQueue {
     public CPSQueue(int size) {
         queue = new long[size];
         Arrays.fill(queue, 0);
-        index = 0;
+        index = -1;
     }
 
     public double getCPS() {
         double sum = 0;
-        for (int i = 1; i < queue.length; i++) {
+        for (int i = 1; i < queue.length - 1; i++) {
             long a = queue[(index + i) % queue.length];
             long b = queue[(index + i + 1) % queue.length];
             if (a == 0)
@@ -37,7 +37,8 @@ final class CPSQueue {
     }
 
     public void update() {
-        queue[++index % queue.length] = System.currentTimeMillis();
+        index = (index + 1) % queue.length;
+        queue[index] = System.currentTimeMillis();
     }
 }
 
@@ -59,7 +60,7 @@ public class HighCPS extends Node implements Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onClick(final PlayerInteractEvent event) {
-        if (event.getAction() != Action.LEFT_CLICK_AIR && event.getAction() != Action.LEFT_CLICK_BLOCK)
+        if (event.getAction() != Action.LEFT_CLICK_AIR)
             return;
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
         CPSQueue cpsQueue = (CPSQueue) player.getData(this.getClass());
@@ -74,6 +75,5 @@ public class HighCPS extends Node implements Listener {
                 Bukkit.broadcastMessage("CPS: " + cps);
             }
         }
-
     }
 }
