@@ -14,6 +14,14 @@ public class NodeConfig {
         return nodesConfig.get(prefix + entry);
     }
 
+    public long getLong(String entry) {
+        return nodesConfig.getLong(prefix + entry);
+    }
+
+    public double getDouble(String entry) {
+        return nodesConfig.getDouble(prefix + entry);
+    }
+
     public String getString(String entry) {
         return nodesConfig.getString(prefix + entry);
     }

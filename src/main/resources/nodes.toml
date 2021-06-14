@@ -1,7 +1,21 @@
-# Combat
+# COMBAT
+
+# This node will calculate the players' Clicks Per Second in real time
 [highcps]
 enabled = true
+historic = 10 # amount of clicks used to calculate the CPS
 
-# Render
+[highcps.alert]
+enabled = true
+min_cps = 10.0
+
+[[highcps.punishers]]
+min_cps = 14.0
+punisher = "combat"
+add = 1
+
+# RENDER
+
+# This node will make ineffective healthbar mods
 [healthbar]
 enabled = true

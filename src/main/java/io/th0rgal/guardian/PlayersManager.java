@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.events;
+package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.GuardianPlayer;
 import org.bukkit.Bukkit;

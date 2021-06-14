@@ -2,7 +2,7 @@ package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.NodeConfig;
-import io.th0rgal.guardian.events.PlayersManager;
+import io.th0rgal.guardian.PlayersManager;
 import io.th0rgal.guardian.nodes.combat.HighCPS;
 import io.th0rgal.guardian.nodes.render.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;

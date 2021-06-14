@@ -1,14 +1,16 @@
-[example]
+[combat]
 
-[[action]]
+decrease = 1 # decrease every 5 minutes
+
+[[combat.action]]
 threshold = 10
 alert = "{user} is suspicious"
 
-[[action]]
+[[combat.action]]
 threshold = 50
 alert = "{player} has an extremely suspicious behavior"
 
-[[action]]
+[[combat.action]]
 threshold = 100
 commands = [
     "ban {player} 'You have been automatically banned for cheating'"

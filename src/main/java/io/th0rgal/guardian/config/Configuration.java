@@ -41,6 +41,14 @@ public class Configuration {
         return result.get(entry);
     }
 
+    public long getLong(String entry) {
+        return result.getLong(entry);
+    }
+
+    public double getDouble(String entry) {
+        return result.getDouble(entry);
+    }
+
     public String getString(String entry) {
         return result.getString(entry);
     }

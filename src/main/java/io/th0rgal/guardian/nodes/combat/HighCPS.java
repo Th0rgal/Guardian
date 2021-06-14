@@ -2,7 +2,7 @@ package io.th0rgal.guardian.nodes.combat;
 
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.config.NodeConfig;
-import io.th0rgal.guardian.events.PlayersManager;
+import io.th0rgal.guardian.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -64,10 +64,16 @@ public class HighCPS extends Node implements Listener {
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
         CPSQueue cpsQueue = (CPSQueue) player.getData(this.getClass());
         if (cpsQueue == null) {
-            cpsQueue = new CPSQueue(20);
+            cpsQueue = new CPSQueue((int) configuration.getLong("historic"));
             player.setData(this.getClass(), cpsQueue);
         }
         cpsQueue.update();
-        Bukkit.broadcastMessage("CPS: " + cpsQueue.getCPS());
+        if (configuration.getBoolean("alert.enabled")) {
+            double cps = cpsQueue.getCPS();
+            if (cps > configuration.getDouble("alert.min_cps")) {
+                Bukkit.broadcastMessage("CPS: " + cps);
+            }
+        }
+
     }
 }
