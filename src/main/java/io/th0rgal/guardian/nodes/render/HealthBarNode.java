@@ -46,7 +46,13 @@ public class HealthBarNode extends Node implements Listener {
                             return;
                         Player player = event.getPlayer();
                         PacketContainer packet = event.getPacket();
-                        Entity entity = packet.getEntityModifier(event).read(0);
+                        Entity entity = null;
+                        int entityId = packet.getIntegers().read(0);
+                        for (Entity worldEntity : player.getWorld().getLivingEntities())
+                            if (worldEntity.getEntityId() == entityId) {
+                                entity = worldEntity;
+                                break;
+                            }
                         if (isDisabledFor(playersManager.getPlayer(player))
                                 || player == entity
                                 || !(entity instanceof LivingEntity)
@@ -55,7 +61,8 @@ public class HealthBarNode extends Node implements Listener {
                                 || entity.getPassengers().contains(player))
                             return;
                         for (WrappedWatchableObject watch : packet.getWatchableCollectionModifier().read(0))
-                            if (watch.getIndex() == 8 && (float) watch.getValue() != 0f)
+
+                            if (watch.getIndex() == 9 && (float) watch.getValue() != 0f)
                                 watch.setValue((float) ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     }
                 });
