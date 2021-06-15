@@ -60,6 +60,15 @@ public abstract class Database {
             prepareStatement.setInt(2, score);
             prepareStatement.executeUpdate();
         } catch (SQLException exception) {
+            if (exception.getErrorCode() == 1)
+                try (Connection connection = getSQLConnection(); PreparedStatement prepareStatement =
+                        connection.prepareStatement("ALTER TABLE " + table + " ADD `" + punisher + "` int(11) NOT NULL default 0")) {
+                    prepareStatement.executeUpdate();
+                    setScore(uuid, punisher, score);
+                    return;
+                } catch (SQLException throwables) {
+                    exception = throwables;
+                }
             new ExceptionHandler(exception).fire(plugin.getLogger());
         }
     }

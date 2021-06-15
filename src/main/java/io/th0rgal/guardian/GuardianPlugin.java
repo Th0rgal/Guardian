@@ -14,6 +14,8 @@ import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.UUID;
+
 public class GuardianPlugin extends JavaPlugin {
 
     public void onLoad() {
