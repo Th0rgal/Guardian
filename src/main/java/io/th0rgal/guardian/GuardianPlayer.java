@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.UUID;
 
 public class GuardianPlayer {
 
@@ -33,6 +34,10 @@ public class GuardianPlayer {
 
     public Player toBukkitPlayer() {
         return player;
+    }
+
+    public UUID getId() {
+        return player.getUniqueId();
     }
 
     public Object getData(Class<? extends Node> nodeClass) {
