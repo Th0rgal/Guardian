@@ -1,5 +1,8 @@
 package io.th0rgal.guardian.config;
 
+import org.tomlj.TomlArray;
+import org.tomlj.TomlTable;
+
 public class NodeConfig {
 
     private final Configuration nodesConfig;
@@ -28,6 +31,22 @@ public class NodeConfig {
 
     public boolean getBoolean(String entry) {
         return nodesConfig.getBoolean(prefix + entry);
+    }
+
+    public boolean isTable(String entry) {
+        return nodesConfig.isTable(prefix + entry);
+    }
+
+    public TomlTable getTable(String entry) {
+        return nodesConfig.getTable(prefix + entry);
+    }
+
+    public boolean isArray(String entry) {
+        return nodesConfig.isArray(prefix + entry);
+    }
+
+    public TomlArray getArray(String entry) {
+        return nodesConfig.getArray(prefix + entry);
     }
 
 }

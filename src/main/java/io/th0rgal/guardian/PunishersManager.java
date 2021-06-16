@@ -2,38 +2,23 @@ package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.PunisherAction;
+import io.th0rgal.guardian.config.PunisherConfig;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.tomlj.TomlArray;
-import org.tomlj.TomlTable;
 
 import java.util.*;
 
 public class PunishersManager {
 
-    private final Map<String, List<PunisherAction>> actionsMap;
+    private final Map<String, PunisherConfig> actionsMap;
     private final Database database;
 
     public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration) {
         actionsMap = new HashMap<>();
-        for (String name : punishersConfiguration.getKeys()) {
-            TomlTable punisher = punishersConfiguration.getTable(name);
-            double decrease = punisher.getDouble("decrease");
-            TomlArray array = punisher.getArray("action");
-            List<PunisherAction> actions = new ArrayList<>();
-            for (Object actionObject : array.toList()) {
-                TomlTable actionTable = (TomlTable) actionObject;
-                PunisherAction action = new PunisherAction(actionTable.getDouble("threshold"));
-                if (actionTable.isString("alert"))
-                    action.setAlert(actionTable.getString("alert"));
-                if (actionTable.isString("commands"))
-                    action.setAlert(actionTable.getString("alert"));
-                actions.add(action);
-            }
-            actionsMap.put(name, actions);
-        }
-
+        for (String name : punishersConfiguration.getKeys())
+            actionsMap.put(name, new PunisherConfig(punishersConfiguration, name));
         database = new SQLite(plugin, getPunishers(), "punishers");
         database.load();
     }
@@ -45,11 +30,13 @@ public class PunishersManager {
      * @param punisher The punisher's name
      * @param amount   Score to add (can be negative)
      */
-    public void add(GuardianPlayer player, String punisher, int amount) {
+    public void add(GuardianPlayer player, String punisher, double amount) {
+        double newScore = Math.max(database.getScore(player.getId(), punisher) + amount, 0);
         database.setScore(player.getId(),
                 punisher,
-                Math.max(database.getScore(player.getId(), punisher) + amount, 0)
+                newScore
         );
+        performActions(punisher, player, newScore);
     }
 
     /**
@@ -59,20 +46,33 @@ public class PunishersManager {
      * @param punisher The punisher's name
      * @param amount   Scalar modifier
      */
-    public void multiply(GuardianPlayer player, String punisher, int amount) {
+    public void multiply(GuardianPlayer player, String punisher, double amount) {
+        double newScore = Math.max(database.getScore(player.getId(), punisher) * amount, 0);
         database.setScore(player.getId(),
                 punisher,
-                Math.max(database.getScore(player.getId(), punisher) * amount, 0)
+                newScore
         );
+        performActions(punisher, player, newScore);
     }
 
-    private void performActions(String punisher, GuardianPlayer player) {
-        for (PunisherAction action : actionsMap.get(punisher)) {
+    private void performActions(String punisher, GuardianPlayer player, double score) {
+        boolean first = true;
+        for (PunisherAction action : actionsMap.get(punisher).getActions()) {
+
+            if (score < action.getThreshold())
+                continue;
+
+            if (first)
+                first = false;
+            else if (!action.concurrent)
+                continue;
+
             if (action.hasAlert())
-                action.getAlert();
+                Bukkit.broadcastMessage(action.getAlert());
 
             if (action.hasCommands())
-                action.getCommands();
+                for (String command : action.getCommands())
+                    Bukkit.broadcastMessage(command);
         }
     }
 

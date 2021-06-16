@@ -5,13 +5,10 @@
 enabled = true
 historic = 10 # amount of clicks used to calculate the CPS
 
-[highcps.alert]
-enabled = true
-min_cps = 10.0
-
 [[highcps.punishers]]
-min_cps = 14.0
 punisher = "combat"
+concurrent = true # will be activated even if a higher check is
+min_cps = 14.0
 add = 1.0
 
 # RENDER

@@ -1,6 +1,7 @@
 package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -9,12 +10,14 @@ public abstract class Node {
 
     protected final JavaPlugin plugin;
     protected final PlayersManager playersManager;
+    protected final PunishersManager punishersManager;
     protected final String name;
     protected final NodeConfig configuration;
 
-    public Node(JavaPlugin plugin, PlayersManager playersManager, String name, NodeConfig configuration) {
+    public Node(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
         this.plugin = plugin;
         this.playersManager = playersManager;
+        this.punishersManager = punishersManager;
         this.name = name;
         this.configuration = configuration;
     }

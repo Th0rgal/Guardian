@@ -6,9 +6,12 @@ public class PunisherAction {
 
     private String alert;
     private List<String> commands;
+    private final double threshold;
+    public final boolean concurrent;
 
-    public PunisherAction(double threshold) {
-
+    public PunisherAction(double threshold, boolean concurrent) {
+        this.threshold = threshold;
+        this.concurrent = concurrent;
     }
 
     public boolean hasAlert() {
@@ -35,4 +38,7 @@ public class PunisherAction {
         return commands;
     }
 
+    public double getThreshold() {
+        return threshold;
+    }
 }

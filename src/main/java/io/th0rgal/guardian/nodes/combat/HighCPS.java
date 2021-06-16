@@ -1,6 +1,7 @@
 package io.th0rgal.guardian.nodes.combat;
 
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;
@@ -11,8 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.tomlj.TomlTable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 final class CPSQueue {
     private final long[] queue;
@@ -42,10 +47,26 @@ final class CPSQueue {
     }
 }
 
+record PunisherTrigger(String name, boolean concurrent, double minCps, double addition, double multiply) {
+}
+
 public class HighCPS extends Node implements Listener {
 
-    public HighCPS(JavaPlugin plugin, PlayersManager playersManager, String name, NodeConfig configuration) {
-        super(plugin, playersManager, name, configuration);
+    private final List<PunisherTrigger> triggers;
+
+    public HighCPS(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
+        super(plugin, playersManager, punishersManager, name, configuration);
+        triggers = new ArrayList<>();
+        if (configuration.isArray("punishers"))
+            for (Object punisherObject : configuration.getArray("punishers").toList()) {
+                TomlTable punisherTable = (TomlTable) punisherObject;
+                triggers.add(new PunisherTrigger(punisherTable.getString("punisher"),
+                        punisherTable.getBoolean("concurrent"),
+                        punisherTable.getDouble("min_cps"),
+                        punisherTable.isDouble("add") ? punisherTable.getDouble("add") : 0,
+                        punisherTable.isDouble("multiply") ? punisherTable.getDouble("multiply") : 1));
+            }
+        triggers.sort(Comparator.comparing(PunisherTrigger::minCps).reversed());
     }
 
     @Override
@@ -69,11 +90,12 @@ public class HighCPS extends Node implements Listener {
             player.setData(this.getClass(), cpsQueue);
         }
         cpsQueue.update();
-        if (configuration.getBoolean("alert.enabled")) {
-            double cps = cpsQueue.getCPS();
-            if (cps > configuration.getDouble("alert.min_cps")) {
-                Bukkit.broadcastMessage("CPS: " + cps);
-            }
+        double cps = cpsQueue.getCPS();
+        for (int i = 0; i < triggers.size(); i++) {
+            PunisherTrigger trigger = triggers.get(i);
+            if ((i != 0 && !trigger.concurrent()) || cps < trigger.minCps())
+                continue;
+            punishersManager.add(player, trigger.name(), trigger.addition());
         }
     }
 }

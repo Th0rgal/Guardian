@@ -55,8 +55,16 @@ public class Configuration {
         return result.getBoolean(entry);
     }
 
+    public boolean isArray(String entry) {
+        return result.isArray(entry);
+    }
+
     public TomlArray getArray(String entry) {
         return result.getArray(entry);
+    }
+
+    public boolean isTable(String entry) {
+        return result.isTable(entry);
     }
 
     public TomlTable getTable(String entry) {

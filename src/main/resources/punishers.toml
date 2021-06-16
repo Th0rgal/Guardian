@@ -3,15 +3,18 @@
 decrease = 1.0 # decrease every 5 minutes
 
 [[combat.action]]
-threshold = 10.0
+threshold = 1.0
+concurrent = false # will not be activated if a higher check is
 alert = "{user} is suspicious"
 
 [[combat.action]]
 threshold = 50.0
+concurrent = true # will be activated even if a higher check is
 alert = "{player} has an extremely suspicious behavior"
 
 [[combat.action]]
 threshold = 100.0
+concurrent = true # will be activated even if a higher check is
 commands = [
     "ban {player} 'You have been automatically banned for cheating'"
 ]

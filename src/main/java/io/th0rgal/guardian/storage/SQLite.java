@@ -48,7 +48,7 @@ public class SQLite extends Database {
             Statement s = connection.createStatement();
             StringBuilder tokensTable = new StringBuilder("CREATE TABLE IF NOT EXISTS " + name + " (`uuid` varchar(32) NOT NULL,");
             for (String punisher : punishers)
-                tokensTable.append("`").append(punisher).append("` int(11) NOT NULL default 0,");
+                tokensTable.append("`").append(punisher).append("` FLOAT(24) NOT NULL default 0,");
             tokensTable.append("PRIMARY KEY (`uuid`));");
             s.executeUpdate(tokensTable.toString());
             s.close();
