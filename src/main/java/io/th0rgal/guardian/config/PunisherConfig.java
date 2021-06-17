@@ -24,7 +24,6 @@ public class PunisherConfig {
             if (table.isArray("commands"))
                 action.setCommands((List<String>) (List<?>) table.getArray("commands").toList());
             actions.add(action);
-            System.out.println(actions);
         }
         actions.sort(Comparator.comparing(PunisherAction::getThreshold).reversed());
     }

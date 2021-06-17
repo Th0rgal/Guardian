@@ -5,7 +5,7 @@ decrease = 1.0 # decrease every 5 minutes
 [[combat.action]]
 threshold = 1.0
 concurrent = false # will not be activated if a higher check is
-alert = "{user} is suspicious"
+alert = "{player} is suspicious"
 
 [[combat.action]]
 threshold = 50.0
