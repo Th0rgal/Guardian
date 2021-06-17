@@ -1,5 +1,10 @@
 package io.th0rgal.guardian;
 
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;
 import org.bukkit.Bukkit;
@@ -26,9 +31,10 @@ public class PlayersManager implements Listener {
         this.database = new SQLite(plugin, punishers, "punishers");
         database.load();
         this.punishers = punishers;
-        Bukkit.getPluginManager().registerEvents(this, plugin);
         for (Player player : Bukkit.getOnlinePlayers())
             loadPlayer(player);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+        registerPacketsListener(plugin);
     }
 
     public GuardianPlayer getPlayer(UUID uuid) {
@@ -58,5 +64,20 @@ public class PlayersManager implements Listener {
         for (String punisher : punishers)
             guardianPlayer.setScore(punisher, database.getScore(player.getUniqueId(), punisher));
         players.put(player.getUniqueId(), guardianPlayer);
+    }
+
+    private void registerPacketsListener(JavaPlugin plugin) {
+        ProtocolLibrary.getProtocolManager().addPacketListener(
+                new PacketAdapter(plugin, ListenerPriority.HIGH, PacketType.Play.Server.KEEP_ALIVE, PacketType.Play.Client.KEEP_ALIVE) {
+                    @Override
+                    public void onPacketSending(PacketEvent event) {
+                        getPlayer(event.getPlayer()).updatePingTime();
+                    }
+
+                    @Override
+                    public void onPacketReceiving(PacketEvent event) {
+                        getPlayer(event.getPlayer()).updatePongTime();
+                    }
+                });
     }
 }

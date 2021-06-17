@@ -14,6 +14,8 @@ public class GuardianPlayer {
     private final Map<String, Double> scores;
     private final HashSet<Class<? extends Node>> disabledNodes;
     private final Map<Class<? extends Node>, Object> data;
+    private long lastPingTime;
+    private long ping = -1;
 
     public GuardianPlayer(Player player) {
         this.player = player;
@@ -64,6 +66,18 @@ public class GuardianPlayer {
 
     public void setData(Class<? extends Node> nodeClass, Object nodeData) {
         data.put(nodeClass, nodeData);
+    }
+
+    public long getPing() {
+        return ping;
+    }
+
+    public void updatePingTime() {
+        this.lastPingTime = System.currentTimeMillis();
+    }
+
+    public void updatePongTime() {
+        ping = System.currentTimeMillis() - lastPingTime;
     }
 
 }
