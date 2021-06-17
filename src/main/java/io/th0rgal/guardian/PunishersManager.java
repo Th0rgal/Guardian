@@ -3,6 +3,8 @@ package io.th0rgal.guardian;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.PunisherAction;
 import io.th0rgal.guardian.config.PunisherConfig;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,9 +13,13 @@ import java.util.*;
 public class PunishersManager {
 
     private final Map<String, PunisherConfig> actionsMap;
+    private final MiniMessage parser;
+    private final BukkitAudiences adventure;
 
-    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration) {
+    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration, MiniMessage parser, BukkitAudiences adventure) {
         actionsMap = new HashMap<>();
+        this.parser = parser;
+        this.adventure = adventure;
         for (String name : punishersConfiguration.getKeys())
             actionsMap.put(name, new PunisherConfig(punishersConfiguration, name));
     }
@@ -57,7 +63,9 @@ public class PunishersManager {
                 continue;
 
             if (action.hasAlert())
-                Bukkit.broadcastMessage(action.getAlert().replace("{player}", player.toBukkitPlayer().getName()));
+                adventure.sender(Bukkit.getConsoleSender()).sendMessage(
+                        parser.parse(action.getAlert().replace("{player}", player.toBukkitPlayer().getName()))
+                );
 
             if (action.hasCommands())
                 for (String command : action.getCommands())
