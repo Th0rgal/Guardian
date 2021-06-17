@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.nodes.combat;
+package io.th0rgal.guardian.nodes.combat.highcps;
 
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.PunishersManager;
@@ -15,40 +15,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.tomlj.TomlTable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-final class CPSQueue {
-    private final long[] queue;
-    private int index;
-
-    public CPSQueue(int size) {
-        queue = new long[size];
-        Arrays.fill(queue, 0);
-        index = -1;
-    }
-
-    public double getCPS() {
-        double sum = 0;
-        for (int i = 1; i < queue.length - 1; i++) {
-            long a = queue[(index + i) % queue.length];
-            long b = queue[(index + i + 1) % queue.length];
-            if (a == 0)
-                return 0;
-            sum += b - a;
-        }
-        return (1000 * (queue.length - 1)) / sum;
-    }
-
-    public void update() {
-        index = (index + 1) % queue.length;
-        queue[index] = System.currentTimeMillis();
-    }
-}
-
-record PunisherTrigger(String name, boolean concurrent, double minCps, double addition, double multiply) {
-}
 
 public class HighCPS extends Node implements Listener {
 

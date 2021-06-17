@@ -4,7 +4,7 @@ import io.th0rgal.guardian.PunishersManager;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
-import io.th0rgal.guardian.nodes.combat.HighCPS;
+import io.th0rgal.guardian.nodes.combat.highcps.HighCPS;
 import io.th0rgal.guardian.nodes.render.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;
 
