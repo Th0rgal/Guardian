@@ -61,7 +61,7 @@ public class PunishersManager {
 
             if (action.hasCommands())
                 for (String command : action.getCommands())
-                    Bukkit.broadcastMessage(command);
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
         }
     }
 

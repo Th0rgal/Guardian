@@ -18,6 +18,7 @@ public class CommandsManager {
     }
 
     public void register() {
+        System.out.println("yolo");
         new CommandAPICommand("guardian")
                 .withAliases("guard", "g") // Command aliases
                 .executes((sender, args) -> {

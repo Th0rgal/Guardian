@@ -24,6 +24,7 @@ public class PlayersManager implements Listener {
 
     public PlayersManager(JavaPlugin plugin, Set<String> punishers) {
         this.database = new SQLite(plugin, punishers, "punishers");
+        database.load();
         this.punishers = punishers;
         Bukkit.getPluginManager().registerEvents(this, plugin);
         for (Player player : Bukkit.getOnlinePlayers())
