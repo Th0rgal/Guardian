@@ -5,6 +5,7 @@ import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
 import io.th0rgal.guardian.nodes.combat.highcps.HighCPS;
+import io.th0rgal.guardian.nodes.combat.reach.Reach;
 import io.th0rgal.guardian.nodes.render.HealthBarNode;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +31,7 @@ public class NodesManager {
         this.playersManager = playersManager;
         this.punishersManager = punishersManager;
         registerNode(HighCPS::new, "highcps");
+        registerNode(Reach::new, "reach");
         registerNode(HealthBarNode::new, "healthbar");
     }
 

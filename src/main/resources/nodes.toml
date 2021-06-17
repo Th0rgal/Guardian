@@ -11,6 +11,10 @@ concurrent = true # will be activated even if a higher check is
 min_cps = 14.0
 add = 1.0
 
+# This node will analyse the distance between the players and the entities they are attacking
+[reach]
+enabled = true
+
 # RENDER
 
 # This node will make ineffective healthbar mods
