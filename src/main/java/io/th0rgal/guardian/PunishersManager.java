@@ -3,8 +3,6 @@ package io.th0rgal.guardian;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.PunisherAction;
 import io.th0rgal.guardian.config.PunisherConfig;
-import io.th0rgal.guardian.storage.Database;
-import io.th0rgal.guardian.storage.SQLite;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,14 +11,11 @@ import java.util.*;
 public class PunishersManager {
 
     private final Map<String, PunisherConfig> actionsMap;
-    private final Database database;
 
     public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration) {
         actionsMap = new HashMap<>();
         for (String name : punishersConfiguration.getKeys())
             actionsMap.put(name, new PunisherConfig(punishersConfiguration, name));
-        database = new SQLite(plugin, getPunishers(), "punishers");
-        database.load();
     }
 
     /**
@@ -31,11 +26,8 @@ public class PunishersManager {
      * @param amount   Score to add (can be negative)
      */
     public void add(GuardianPlayer player, String punisher, double amount) {
-        double newScore = Math.max(database.getScore(player.getId(), punisher) + amount, 0);
-        database.setScore(player.getId(),
-                punisher,
-                newScore
-        );
+        double newScore = Math.max(player.getScore(punisher) + amount, 0);
+        player.setScore(punisher, newScore);
         performActions(punisher, player, newScore);
     }
 
@@ -47,11 +39,8 @@ public class PunishersManager {
      * @param amount   Scalar modifier
      */
     public void multiply(GuardianPlayer player, String punisher, double amount) {
-        double newScore = Math.max(database.getScore(player.getId(), punisher) * amount, 0);
-        database.setScore(player.getId(),
-                punisher,
-                newScore
-        );
+        double newScore = Math.max(player.getScore(punisher) * amount, 0);
+        player.setScore(punisher, newScore);
         performActions(punisher, player, newScore);
     }
 

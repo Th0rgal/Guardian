@@ -8,6 +8,8 @@ import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.config.MainConfig;
 import io.th0rgal.guardian.nodes.NodesManager;
+import io.th0rgal.guardian.storage.Database;
+import io.th0rgal.guardian.storage.SQLite;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,8 +28,8 @@ public class GuardianPlugin extends JavaPlugin {
                 "languages/" + config.getString(Config.SETTINGS_LANGUAGE));
         BukkitAudiences adventure = BukkitAudiences.create(this);
         new CommandsManager(adventure, lang).register();
-        PlayersManager playersManager = new PlayersManager(this);
         PunishersManager punishers = new PunishersManager(this, new Configuration(this, "punishers"));
+        PlayersManager playersManager = new PlayersManager(this, punishers.getPunishers());
         new NodesManager(this, new Configuration(this, "nodes"), playersManager, punishers).enableAll();
     }
 
