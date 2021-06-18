@@ -26,9 +26,9 @@ public class GuardianPlugin extends JavaPlugin {
                 "languages/" + config.getString(Config.SETTINGS_LANGUAGE));
         BukkitAudiences adventure = BukkitAudiences.create(this);
         new CommandsManager(adventure, lang).register();
-        PunishersManager punishers = new PunishersManager(this, new Configuration(this, "punishers"), parser, adventure);
-        PlayersManager playersManager = new PlayersManager(this, punishers.getPunishers());
-        new NodesManager(this, new Configuration(this, "nodes"), playersManager, punishers).enableAll();
+        PunishersManager punisher = new PunishersManager(this, new Configuration(this, "punishers"), parser, adventure);
+        PlayersManager playersManager = new PlayersManager(this, punisher);
+        new NodesManager(this, new Configuration(this, "nodes"), playersManager, punisher).enableAll();
     }
 
 }

@@ -77,4 +77,8 @@ public class PunishersManager {
         return actionsMap.keySet();
     }
 
+    public Map<String, PunisherConfig> getPunishersConfig() {
+        return actionsMap;
+    }
+
 }

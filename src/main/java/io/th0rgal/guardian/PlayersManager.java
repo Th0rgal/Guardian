@@ -18,23 +18,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public class PlayersManager implements Listener {
 
     private final Map<UUID, GuardianPlayer> players = new HashMap<>();
     private final Database database;
-    private final Set<String> punishers;
+    private final PunishersManager punisher;
 
-    public PlayersManager(JavaPlugin plugin, Set<String> punishers) {
-        this.database = new SQLite(plugin, punishers, "punishers");
+    public PlayersManager(JavaPlugin plugin, PunishersManager punisher) {
+        this.database = new SQLite(plugin, punisher.getPunishers(), "punishers");
         database.load();
-        this.punishers = punishers;
+        this.punisher = punisher;
         for (Player player : Bukkit.getOnlinePlayers())
             loadPlayer(player);
         Bukkit.getPluginManager().registerEvents(this, plugin);
         registerPacketsListener(plugin);
+        registerPunisherScoreDecrease(plugin);
     }
 
     public GuardianPlayer getPlayer(UUID uuid) {
@@ -54,14 +54,14 @@ public class PlayersManager implements Listener {
     public void onPlayerQuit(final PlayerQuitEvent event) {
         Player player = event.getPlayer();
         GuardianPlayer guardianPlayer = getPlayer(player);
-        for (String punisher : punishers)
+        for (String punisher : punisher.getPunishers())
             database.setScore(player.getUniqueId(), punisher, guardianPlayer.getScore(punisher));
         players.remove(player.getUniqueId());
     }
 
     private void loadPlayer(Player player) {
         GuardianPlayer guardianPlayer = new GuardianPlayer(player);
-        for (String punisher : punishers)
+        for (String punisher : punisher.getPunishers())
             guardianPlayer.setScore(punisher, database.getScore(player.getUniqueId(), punisher));
         players.put(player.getUniqueId(), guardianPlayer);
     }
@@ -79,5 +79,13 @@ public class PlayersManager implements Listener {
                         getPlayer(event.getPlayer()).updatePongTime();
                     }
                 });
+    }
+
+    private void registerPunisherScoreDecrease(JavaPlugin plugin) {
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
+            for (GuardianPlayer player : players.values())
+                for (String punisherName : punisher.getPunishersConfig().keySet())
+                    player.addScore(punisherName, -punisher.getPunishersConfig().get(punisherName).getDecrease());
+        }, 20 * 60 * 5, 20 * 60 * 5);
     }
 }
