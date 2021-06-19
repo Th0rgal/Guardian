@@ -1,7 +1,7 @@
 package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.GuardianPlayer;
-import io.th0rgal.guardian.PunishersManager;
+import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
 import org.bukkit.plugin.java.JavaPlugin;

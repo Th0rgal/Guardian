@@ -16,6 +16,7 @@ public class GuardianPlayer {
     private final Map<Class<? extends Node>, Object> data;
     private long lastPingTime;
     private long ping = -1;
+    private long lastHit = -1;
 
     public GuardianPlayer(Player player) {
         this.player = player;
@@ -25,15 +26,15 @@ public class GuardianPlayer {
     }
 
     public void setScore(String punisher, double score) {
-        scores.put(punisher, score);
+        scores.put(punisher, Math.max(0, score));
     }
 
     public void addScore(String punisher, double scoreAddition) {
-        scores.put(punisher, getScore(punisher) + scoreAddition);
+        setScore(punisher, getScore(punisher) + scoreAddition);
     }
 
     public void multiplyScore(String punisher, double scoreMultiplicator) {
-        scores.put(punisher, getScore(punisher) * scoreMultiplicator);
+        setScore(punisher, getScore(punisher) * scoreMultiplicator);
     }
 
     public double getScore(String punisher) {
@@ -80,4 +81,11 @@ public class GuardianPlayer {
         ping = System.currentTimeMillis() - lastPingTime;
     }
 
+    public long getLastHit() {
+        return lastHit;
+    }
+
+    public void setLastHit() {
+        lastHit = System.currentTimeMillis();
+    }
 }

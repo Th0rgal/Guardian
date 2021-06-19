@@ -1,19 +1,40 @@
 [combat]
 
-decrease = 1.0 # decrease every 5 minutes
+decrease = 0.2 # decrease every minute
 
 [[combat.action]]
+threshold = 2.0
+concurrent = false # will not be activated if a higher check is
+alert = "{player} is suspicious according to the combat punisher"
+
+[[combat.action]]
+threshold = 5.0
+concurrent = true # will be activated even if a higher check is
+alert = "{player} has an extremely suspicious behavior according to the combat punisher"
+
+[[combat.action]]
+threshold = 25.0
+concurrent = true # will be activated even if a higher check is
+commands = [
+    "ban {player} 'You have been automatically banned for cheating'"
+]
+
+[movement]
+
+decrease = 1.0 # decrease every minute
+
+[[movement.action]]
 threshold = 1.0
 concurrent = false # will not be activated if a higher check is
-alert = "{player} is suspicious"
+alert = "{player} is suspicious according to the movement punisher"
 
-[[combat.action]]
-threshold = 50.0
+[[movement.action]]
+threshold = 10.0
 concurrent = true # will be activated even if a higher check is
-alert = "{player} has an extremely suspicious behavior"
+alert = "{player} has an extremely suspicious behavior according to the movement punisher"
 
-[[combat.action]]
-threshold = 100.0
+[[movement.action]]
+threshold = 50.0
 concurrent = true # will be activated even if a higher check is
 commands = [
     "ban {player} 'You have been automatically banned for cheating'"

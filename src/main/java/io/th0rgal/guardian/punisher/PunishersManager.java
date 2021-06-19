@@ -1,5 +1,6 @@
-package io.th0rgal.guardian;
+package io.th0rgal.guardian.punisher;
 
+import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.PunisherAction;
 import io.th0rgal.guardian.config.PunisherConfig;

@@ -5,6 +5,7 @@ import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
+import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;
 import org.bukkit.Bukkit;
@@ -12,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -59,6 +61,12 @@ public class PlayersManager implements Listener {
         players.remove(player.getUniqueId());
     }
 
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onPlayerQuit(final EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player)
+            getPlayer((Player) event.getEntity()).setLastHit();
+    }
+
     private void loadPlayer(Player player) {
         GuardianPlayer guardianPlayer = new GuardianPlayer(player);
         for (String punisher : punisher.getPunishers())
@@ -84,8 +92,11 @@ public class PlayersManager implements Listener {
     private void registerPunisherScoreDecrease(JavaPlugin plugin) {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             for (GuardianPlayer player : players.values())
-                for (String punisherName : punisher.getPunishersConfig().keySet())
+                for (String punisherName : punisher.getPunishersConfig().keySet()) {
+                    System.out.println(punisherName + ":" + player.getScore(punisherName));
                     player.addScore(punisherName, -punisher.getPunishersConfig().get(punisherName).getDecrease());
-        }, 20 * 60 * 5, 20 * 60 * 5);
+                }
+
+        }, 20 * 60, 20 * 60);
     }
 }

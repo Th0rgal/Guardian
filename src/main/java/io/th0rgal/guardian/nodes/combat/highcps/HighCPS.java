@@ -1,10 +1,11 @@
 package io.th0rgal.guardian.nodes.combat.highcps;
 
 import io.th0rgal.guardian.GuardianPlayer;
-import io.th0rgal.guardian.PunishersManager;
+import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;
+import io.th0rgal.guardian.punisher.SerializedPunisherTrigger;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class HighCPS extends Node implements Listener {
 
-    private final List<PunisherTrigger> triggers;
+    private final List<SerializedPunisherTrigger> triggers;
 
     public HighCPS(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
         super(plugin, playersManager, punishersManager, name, configuration);
@@ -29,13 +30,13 @@ public class HighCPS extends Node implements Listener {
         if (configuration.isArray("punishers"))
             for (Object punisherObject : configuration.getArray("punishers").toList()) {
                 TomlTable punisherTable = (TomlTable) punisherObject;
-                triggers.add(new PunisherTrigger(punisherTable.getString("punisher"),
+                triggers.add(new SerializedPunisherTrigger(punisherTable.getString("punisher"),
                         punisherTable.getBoolean("concurrent"),
                         punisherTable.getDouble("min_cps"),
                         punisherTable.isDouble("add") ? punisherTable.getDouble("add") : 0,
                         punisherTable.isDouble("multiply") ? punisherTable.getDouble("multiply") : 1));
             }
-        triggers.sort(Comparator.comparing(PunisherTrigger::minCps).reversed());
+        triggers.sort(Comparator.comparing(SerializedPunisherTrigger::trigger).reversed());
     }
 
     @Override
@@ -61,10 +62,11 @@ public class HighCPS extends Node implements Listener {
         cpsQueue.update();
         double cps = cpsQueue.getCPS();
         for (int i = 0; i < triggers.size(); i++) {
-            PunisherTrigger trigger = triggers.get(i);
-            if ((i != 0 && !trigger.concurrent()) || cps < trigger.minCps())
+            SerializedPunisherTrigger trigger = triggers.get(i);
+            if ((i != 0 && !trigger.concurrent()) || cps < trigger.trigger())
                 continue;
             punishersManager.add(player, trigger.name(), trigger.addition());
+            punishersManager.multiply(player, trigger.name(), trigger.multiply());
         }
     }
 }
