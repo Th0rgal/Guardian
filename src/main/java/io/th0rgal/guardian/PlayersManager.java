@@ -92,11 +92,8 @@ public class PlayersManager implements Listener {
     private void registerPunisherScoreDecrease(JavaPlugin plugin) {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () -> {
             for (GuardianPlayer player : players.values())
-                for (String punisherName : punisher.getPunishersConfig().keySet()) {
-                    System.out.println(punisherName + ":" + player.getScore(punisherName));
+                for (String punisherName : punisher.getPunishersConfig().keySet())
                     player.addScore(punisherName, -punisher.getPunishersConfig().get(punisherName).getDecrease());
-                }
-
         }, 20 * 60, 20 * 60);
     }
 }
