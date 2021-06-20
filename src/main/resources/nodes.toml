@@ -7,9 +7,58 @@ historic = 10 # amount of clicks used to calculate the CPS
 
 [[highcps.punishers]]
 punisher = "combat"
-concurrent = true # will be activated even if a higher check is
-min_cps = 14.0
+concurrent = false # will not be activated if a higher check is
+min_cps = 12.0
 add = 1.0
+
+[[highcps.punishers]]
+punisher = "combat"
+concurrent = false
+min_cps = 14.0
+add = 2.0
+
+[[highcps.punishers]]
+punisher = "combat"
+concurrent = true # will be activated even if a higher check is
+min_cps = 16.0
+add = 5.0
+multiply = 1.10
+
+# This node will analyse the distance between the players and the entities they are attacking
+[reach]
+enabled = true
+
+[[reach.punishers]]
+punisher = "combat"
+concurrent = false
+min_reach = 4.4
+add = 0.5
+
+[[reach.punishers]]
+punisher = "combat"
+concurrent = false
+min_reach = 4.5
+add = 1.0
+
+[[reach.punishers]]
+punisher = "combat"
+concurrent = false
+min_reach = 4.6
+add = 2.0
+
+[[reach.punishers]]
+punisher = "combat"
+concurrent = false
+min_reach = 4.8
+add = 5.0
+
+[[reach.punishers]]
+punisher = "combat"
+concurrent = true
+min_reach = 5.0
+add = 10.0
+
+# MOVEMENTS
 
 [speed]
 enabled = true
@@ -21,9 +70,6 @@ punisher = "movement"
 concurrent = true # will be activated even if a higher check is
 add = 1.0
 
-# This node will analyse the distance between the players and the entities they are attacking
-[reach]
-enabled = true
 
 # RENDER
 

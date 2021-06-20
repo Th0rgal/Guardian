@@ -4,7 +4,10 @@ import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
 import io.th0rgal.guardian.PlayersManager;
+import io.th0rgal.guardian.punisher.SerializedPunisherTrigger;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.List;
 
 public abstract class Node {
 
@@ -36,5 +39,16 @@ public abstract class Node {
 
     public boolean isDisabledFor(GuardianPlayer player) {
         return player.isDisabled(this.getClass());
+    }
+
+    protected void applySerializedTrigger(GuardianPlayer player, List<SerializedPunisherTrigger> triggers, double value) {
+        boolean triggered = false;
+        for (SerializedPunisherTrigger trigger : triggers) {
+            if ((triggered && !trigger.concurrent()) || value < trigger.trigger())
+                continue;
+            triggered = true;
+            punishersManager.add(player, trigger.name(), trigger.addition());
+            punishersManager.multiply(player, trigger.name(), trigger.multiply());
+        }
     }
 }

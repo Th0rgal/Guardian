@@ -60,13 +60,6 @@ public class HighCPS extends Node implements Listener {
             player.setData(this.getClass(), cpsQueue);
         }
         cpsQueue.update();
-        double cps = cpsQueue.getCPS();
-        for (int i = 0; i < triggers.size(); i++) {
-            SerializedPunisherTrigger trigger = triggers.get(i);
-            if ((i != 0 && !trigger.concurrent()) || cps < trigger.trigger())
-                continue;
-            punishersManager.add(player, trigger.name(), trigger.addition());
-            punishersManager.multiply(player, trigger.name(), trigger.multiply());
-        }
+        applySerializedTrigger(player, triggers, cpsQueue.getCPS());
     }
 }
