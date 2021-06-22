@@ -4,7 +4,8 @@ import net.kyori.adventure.text.format.TextColor;
 
 public enum Message {
 
-    PREFIX("plugin.prefix");
+    PREFIX("plugin.prefix"),
+    NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE);
 
     private final String path;
     public final TextColor color;

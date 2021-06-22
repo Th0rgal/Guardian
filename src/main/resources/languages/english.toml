@@ -1,2 +1,5 @@
 [plugin]
 prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
+
+[commands]
+not_a_player = "you must be a player to use this command"
