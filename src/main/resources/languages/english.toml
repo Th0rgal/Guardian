@@ -3,3 +3,10 @@ prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
 
 [commands]
 not_a_player = "you must be a player to use this command"
+
+[items]
+teleport_item_name = "<#47b594>Random teleportation to a player"
+freeze_item_name = "<#4fcdf0>Freeze the targeted player"
+kill_item_name = "<#e36659>Kill the targeted player"
+ban_item_name = "<#805753>Ban the targeted player"
+info_item_name = "<#c2c9ab>Show targeted player stats"

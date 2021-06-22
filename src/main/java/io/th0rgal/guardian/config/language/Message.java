@@ -5,7 +5,12 @@ import net.kyori.adventure.text.format.TextColor;
 public enum Message {
 
     PREFIX("plugin.prefix"),
-    NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE);
+    NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE),
+    TELEPORT_ITEM_NAME("items.teleport_item_name"),
+    FREEZE_ITEM_NAME("items.freeze_item_name"),
+    KILL_ITEM_NAME("items.kill_item_name"),
+    BAN_ITEM_NAME("items.ban_item_name"),
+    INFO_ITEM_NAME("items.info_item_name");
 
     private final String path;
     public final TextColor color;
