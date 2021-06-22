@@ -7,6 +7,7 @@ import io.th0rgal.guardian.config.Config;
 import io.th0rgal.guardian.config.Configuration;
 import io.th0rgal.guardian.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.config.MainConfig;
+import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.NodesManager;
 import io.th0rgal.guardian.punisher.PunishersManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
@@ -28,7 +29,7 @@ public class GuardianPlugin extends JavaPlugin {
         BukkitAudiences adventure = BukkitAudiences.create(this);
         PunishersManager punisher = new PunishersManager(this, new Configuration(this, "punishers"), parser, adventure);
         PlayersManager playersManager = new PlayersManager(this, punisher);
-        new CommandsManager(adventure, lang, playersManager).register();
+        new CommandsManager(this, adventure, lang, playersManager).register();
         new NodesManager(this, new Configuration(this, "nodes"), playersManager, punisher).enableAll();
     }
 

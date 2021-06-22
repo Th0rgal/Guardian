@@ -1,10 +1,11 @@
-package io.th0rgal.guardian;
+package io.th0rgal.guardian.events;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
+import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;

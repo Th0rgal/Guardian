@@ -1,6 +1,8 @@
 package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.nodes.Node;
+import org.bukkit.BanList;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -39,6 +41,10 @@ public class GuardianPlayer {
 
     public double getScore(String punisher) {
         return scores.getOrDefault(punisher, 0D);
+    }
+
+    public Map<String, Double> getScores() {
+        return scores;
     }
 
     public void disableNode(Class<? extends Node> nodeClass) {
@@ -87,5 +93,17 @@ public class GuardianPlayer {
 
     public void setLastHit() {
         lastHit = System.currentTimeMillis();
+    }
+
+    public void freeze() {
+
+    }
+
+    public void kill() {
+        player.setHealth(0);
+    }
+
+    public void ban() {
+        Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), null, null, null);
     }
 }

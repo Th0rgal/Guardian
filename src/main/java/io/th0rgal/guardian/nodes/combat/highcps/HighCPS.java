@@ -3,7 +3,7 @@ package io.th0rgal.guardian.nodes.combat.highcps;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.config.NodeConfig;
-import io.th0rgal.guardian.PlayersManager;
+import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;
 import io.th0rgal.guardian.punisher.SerializedPunisherTrigger;
 import org.bukkit.Bukkit;
