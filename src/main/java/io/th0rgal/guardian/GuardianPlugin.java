@@ -38,12 +38,10 @@ public class GuardianPlugin extends JavaPlugin {
     }
 
     public void onDisable() {
-        System.out.println("hello");
         for (Player player : Bukkit.getOnlinePlayers()) {
             GuardianPlayer guardianPlayer = playersManager.getPlayer(player);
             if (guardianPlayer.isFrozen())
                 guardianPlayer.switchFreeze();
-            System.out.println("is inspecting:" + guardianPlayer.isInspecting());
             if (guardianPlayer.isInspecting())
                 guardianPlayer.leaveInspectMode();
         }
