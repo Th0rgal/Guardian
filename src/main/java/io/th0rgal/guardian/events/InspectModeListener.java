@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -52,7 +53,7 @@ public class InspectModeListener implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onRightClickTarget(PlayerInteractEntityEvent event) {
         if (event.getRightClicked() instanceof Player targetPlayer) {
             Player player = event.getPlayer();
@@ -64,8 +65,24 @@ public class InspectModeListener implements Listener {
             if (item == null || item.getItemMeta() == null)
                 return;
             String type = item.getItemMeta().getPersistentDataContainer().get(inspectMode.key, PersistentDataType.STRING);
-            apply_effect(type, target);
+            apply_effect(type, player, target);
 
+        }
+    }
+
+    @EventHandler
+    public void onLeftClickTarget(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player targetPlayer && event.getDamager() instanceof Player player) {
+            if (!playersManager.getPlayer(player).isInspecting())
+                return;
+
+            GuardianPlayer target = playersManager.getPlayer(targetPlayer);
+            ItemStack item = player.getInventory().getItemInMainHand();
+            if (item == null || item.getItemMeta() == null)
+                return;
+            String type = item.getItemMeta().getPersistentDataContainer().get(inspectMode.key, PersistentDataType.STRING);
+            apply_effect(type, player, target);
+            event.setCancelled(true);
         }
     }
 
@@ -97,28 +114,39 @@ public class InspectModeListener implements Listener {
         }
     }
 
-    private void apply_effect(String type, GuardianPlayer target) {
+    private void apply_effect(String type, Player player, GuardianPlayer target) {
+        Message message;
         switch (type) {
 
             case "freeze":
                 target.switchFreeze();
+                if (target.isFrozen()) {
+                    message = Message.PLAYER_FROZEN;
+                } else {
+                    message = Message.PLAYER_UNFROZEN;
+                }
                 break;
 
             case "kill":
                 target.kill();
+                message = Message.TARGET_KILLED;
                 break;
 
             case "ban":
                 target.ban();
+                message = Message.TARGET_BANNED;
                 break;
 
             case "info":
                 target.getScores();
-                break;
-
+                return;
 
             default:
+                return;
         }
+        inspectMode.adventure.sender(player).sendMessage(inspectMode.language.getRich(Message.PREFIX)
+                .color(message.color)
+                .append(inspectMode.language.getRich(message)));
     }
 
 }

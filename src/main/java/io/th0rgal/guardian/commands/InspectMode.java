@@ -46,7 +46,7 @@ public class InspectMode {
                 getItem(Material.ENDER_EYE, Message.TELEPORT_ITEM_NAME, "teleport"),
                 getItem(Material.TRIDENT, Message.FREEZE_ITEM_NAME, "freeze"),
                 getItem(Material.NETHERITE_SWORD, Message.KILL_ITEM_NAME, "kill"),
-                getItem(Material.DAMAGED_ANVIL, Message.BAN_ITEM_NAME, "ban"),
+                getItem(Material.NETHERITE_AXE, Message.BAN_ITEM_NAME, "ban"),
                 getItem(Material.GLOBE_BANNER_PATTERN, Message.INFO_ITEM_NAME, "info")
         };
         Bukkit.getPluginManager().registerEvents(

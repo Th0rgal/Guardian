@@ -60,6 +60,8 @@ public class PlayersManager implements Listener {
         GuardianPlayer guardianPlayer = getPlayer(player);
         if (guardianPlayer.isFrozen())
             guardianPlayer.switchFreeze();
+        if (guardianPlayer.isInspecting())
+            guardianPlayer.leaveInspectMode();
         for (String punisher : punisher.getPunishers())
             database.setScore(player.getUniqueId(), punisher, guardianPlayer.getScore(punisher));
         players.remove(player.getUniqueId());

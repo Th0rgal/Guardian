@@ -21,7 +21,7 @@ public record FreezePlayer(BukkitAudiences adventure, LanguageConfiguration lang
                 .executes((sender, args) -> {
                     GuardianPlayer player = playersManager.getPlayer((Player) args[0]);
                     player.switchFreeze();
-                    Message message = player.isFrozen() ? Message.PLAYER_FROZEN : Message.PLAYER_UNFROZEN;
+                    Message message = player.isFrozen() ? Message.TARGET_FROZEN : Message.TARGET_UNFROZEN;
                     this.adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX)
                             .color(message.color)
                             .append(language.getRich(message)));

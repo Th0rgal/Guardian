@@ -4,8 +4,12 @@ prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
 [commands]
 not_a_player = "you must be a player to use this command"
 not_enough_players = "there are not enough players connected to the server"
-player_frozen = "the target player has been successfully frozen"
-player_unfrozen = "the target player has been successfully unfrozen"
+target_frozen = "the target player has been successfully frozen"
+target_unfrozen = "the target player has been successfully unfrozen"
+player_frozen = "you have been successfully frozen"
+player_unfrozen = "you have been successfully unfrozen"
+target_killed = "the target player has been successfully killed"
+target_banned = "the target player has been successfully banned"
 
 [items]
 teleport_item_name = "<#47b594>Random teleportation to a player"

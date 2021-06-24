@@ -8,8 +8,12 @@ public enum Message {
 
     NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE),
     NOT_ENOUGH_PLAYERS("commands.not_enough_players", MessageColor.SEVERE),
+    TARGET_FROZEN("commands.target_frozen", MessageColor.SUCCESS),
+    TARGET_UNFROZEN("commands.target_unfrozen", MessageColor.SUCCESS),
     PLAYER_FROZEN("commands.player_frozen", MessageColor.SUCCESS),
     PLAYER_UNFROZEN("commands.player_unfrozen", MessageColor.SUCCESS),
+    TARGET_KILLED("commands.target_killed", MessageColor.SUCCESS),
+    TARGET_BANNED("commands.target_banned", MessageColor.SUCCESS),
 
     TELEPORT_ITEM_NAME("items.teleport_item_name"),
     FREEZE_ITEM_NAME("items.freeze_item_name"),
