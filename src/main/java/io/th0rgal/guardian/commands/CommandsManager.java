@@ -25,8 +25,10 @@ public class CommandsManager {
 
     public void register() {
         InspectMode inspectMode = new InspectMode(plugin, adventure, language, playersManager);
+        FreezePlayer freezePlayer = new FreezePlayer(adventure, language, playersManager);
         new CommandAPICommand("guardian")
                 .withAliases("guard", "g") // Command aliases
+                .withSubcommand(freezePlayer.getCommand())
                 .withSubcommand(inspectMode.getInspectCommand())
                 .withSubcommand(inspectMode.getInspectPlayerCommand())
                 .executes((sender, args) -> {

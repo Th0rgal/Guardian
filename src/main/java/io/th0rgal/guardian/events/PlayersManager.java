@@ -16,6 +16,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -57,15 +58,24 @@ public class PlayersManager implements Listener {
     public void onPlayerQuit(final PlayerQuitEvent event) {
         Player player = event.getPlayer();
         GuardianPlayer guardianPlayer = getPlayer(player);
+        if (guardianPlayer.isFrozen())
+            guardianPlayer.switchFreeze();
         for (String punisher : punisher.getPunishers())
             database.setScore(player.getUniqueId(), punisher, guardianPlayer.getScore(punisher));
         players.remove(player.getUniqueId());
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onPlayerQuit(final EntityDamageByEntityEvent event) {
+    public void onPlayerDamaged(final EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player)
             getPlayer((Player) event.getEntity()).setLastHit();
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onFrozenPlayerMove(final PlayerMoveEvent event) {
+        GuardianPlayer player = getPlayer(event.getPlayer());
+        if (player.isFrozen() && !event.getTo().toVector().equals(event.getFrom().toVector()))
+            event.setCancelled(true);
     }
 
     private void loadPlayer(Player player) {

@@ -1,9 +1,13 @@
 package io.th0rgal.guardian;
 
+import io.th0rgal.guardian.commands.InspectData;
 import io.th0rgal.guardian.nodes.Node;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,6 +23,9 @@ public class GuardianPlayer {
     private long lastPingTime;
     private long ping = -1;
     private long lastHit = -1;
+    private float walkSpeed;
+    private boolean frozen = false;
+    private InspectData inspectData;
 
     public GuardianPlayer(Player player) {
         this.player = player;
@@ -95,8 +102,19 @@ public class GuardianPlayer {
         lastHit = System.currentTimeMillis();
     }
 
-    public void freeze() {
+    public void switchFreeze() {
+        if (frozen) {
+            frozen = false;
+            player.setWalkSpeed(walkSpeed);
+        } else {
+            frozen = true;
+            walkSpeed = player.getWalkSpeed();
+            player.setWalkSpeed(0);
+        }
+    }
 
+    public boolean isFrozen() {
+        return frozen;
     }
 
     public void kill() {
@@ -105,5 +123,39 @@ public class GuardianPlayer {
 
     public void ban() {
         Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), null, null, null);
+    }
+
+    public void setInspectData(Player target, Location location, ItemStack[] inventory, GameMode gameMode, boolean invisible) {
+        setInspectData(new InspectData(target, location, inventory, gameMode, invisible));
+    }
+
+    public void setInspectData(InspectData inspectData) {
+        this.inspectData = inspectData;
+    }
+
+    public InspectData getInspectData() {
+        return inspectData;
+    }
+
+    public void setInspectMode(Player target) {
+        setInspectData(target,
+                player.getLocation(),
+                player.getInventory().getContents(),
+                player.getGameMode(),
+                player.isInvisible());
+        player.setGameMode(GameMode.CREATIVE);
+        player.setInvisible(true);
+    }
+
+    public void leaveInspectMode() {
+        player.teleport(inspectData.location());
+        player.getInventory().setContents(inspectData.inventory());
+        player.setGameMode(inspectData.gameMode());
+        player.setInvisible(inspectData.invisible());
+        this.setInspectData(null);
+    }
+
+    public boolean isInspecting() {
+        return this.inspectData != null;
     }
 }
