@@ -90,7 +90,7 @@ public class InspectModeListener implements Listener {
             return;
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
         String type = item.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING);
-        if (type.equals("teleport") && player.isInspecting()) {
+        if (type != null && type.equals("teleport") && player.isInspecting()) {
             InspectData data = player.getInspectData();
             event.setCancelled(true);
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());

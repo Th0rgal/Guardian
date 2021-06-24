@@ -61,8 +61,8 @@ public class Speed extends Node implements Listener {
 
         Location location = player.getLocation();
         Location blockLocation = new Location(world, location.getBlockX(), location.getBlockY() - 1, location.getBlockZ());
-        Location headLocation = blockLocation.clone().add(0, 1, 0);
-        Location above = blockLocation.clone().add(0, 2, 0);
+        Location headLocation = blockLocation.clone().add(0, 2, 0);
+        Location above = blockLocation.clone().add(0, 3, 0);
         long lastHitDiff = Math.abs(System.currentTimeMillis() - guardianPlayer.getLastHit());
 
         if ((event.getTo().getX() == event.getFrom().getX()) && (event.getTo().getZ() == event.getFrom().getZ())
@@ -81,7 +81,7 @@ public class Speed extends Node implements Listener {
         if (location.getY() != location.getBlockY())
             lastJump.put(player.getUniqueId(), System.currentTimeMillis());
 
-        double maxSpeed = player.getWalkSpeed() * 1.3;
+        double maxSpeed = player.getWalkSpeed() * 1.368;
         SpeedData speedData = (SpeedData) guardianPlayer.getData(this.getClass());
         if (speedData == null) {
             speedData = new SpeedData();
@@ -97,7 +97,7 @@ public class Speed extends Node implements Listener {
             speedData.setLastJump();
         }
         if (!onGround)
-            maxSpeed *= 1.3;
+            maxSpeed *= 1.252;
 
         if (isOnIce(player)) {
             speedData.setOnIce();
@@ -105,20 +105,24 @@ public class Speed extends Node implements Listener {
         } else if (speedData.wasOnIce())
             maxSpeed *= 1.875;
 
+        if (!isAir(headLocation.getBlock().getType()))
+            maxSpeed *= 1.1;
+
         double speed = to.toVector().subtract(from.toVector()).setY(0).length();
         if (player.hasPotionEffect(PotionEffectType.SPEED)) {
             int level = getPotionEffectLevel(player, PotionEffectType.SPEED);
             if (level > 0)
                 maxSpeed = (maxSpeed * (((level * 20) * 0.011) + 1));
         }
-        maxSpeed *= tolerance;
+
+        maxSpeed = maxSpeed * (1D + ((double) player.getPing()) / 2000D);
 
         if ((location.getY() != location.getBlockY() || onGround)
                 && speed > maxSpeed && player.getFallDistance() < 0.4
                 && !blockLocation.getBlock().isLiquid()
                 && !nonCubicBlocksNear(location)
-                && isAir(above.getBlock().getType())
-                && isAir(headLocation.getBlock().getType())) {
+                && isAir(above.getBlock().getType())) {
+
             if (rollback)
                 event.setCancelled(true);
             punishersManager.add(guardianPlayer, serializedPunisher.name(), serializedPunisher.addition());

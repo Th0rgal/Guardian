@@ -63,7 +63,7 @@ add = 10.0
 [speed]
 enabled = true
 rollback = true # cancels suspicious movements
-tolerance = 1.08 # accepts up to 8% more than the vanilla limit
+tolerance = 1.02 # accepts up to 2% more than the vanilla limit
 
 [speed.punisher]
 punisher = "movement"
