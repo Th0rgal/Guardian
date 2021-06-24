@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -70,26 +69,20 @@ public class InspectModeListener implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(priority = EventPriority.LOW)
     public void onInteract(PlayerInteractEvent event) {
         ItemStack item = event.getItem();
-        if (event.getAction() != Action.PHYSICAL
-                && item == null
-                || item.getItemMeta() == null)
+        if (item == null || !item.hasItemMeta())
             return;
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
         String type = item.getItemMeta().getPersistentDataContainer().get(inspectMode.key, PersistentDataType.STRING);
-        if (type == null || !player.isInspecting())
-            return;
-        event.setCancelled(true);
-        InspectData data = player.getInspectData();
-
-        if (type.equals("teleport")) {
-
+        if (type.equals("teleport") && player.isInspecting()) {
+            InspectData data = player.getInspectData();
+            event.setCancelled(true);
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
             players.remove(player);
             if (players.size() == 0) {
-                inspectMode.adventure.player(player.toBukkitPlayer()).sendMessage(inspectMode.language.getRich(Message.PREFIX)
+                inspectMode.adventure.player(player.asBukkitPlayer()).sendMessage(inspectMode.language.getRich(Message.PREFIX)
                         .color(Message.NOT_ENOUGH_PLAYERS.color)
                         .append(inspectMode.language.getRich(Message.NOT_ENOUGH_PLAYERS)));
             } else {
@@ -99,14 +92,9 @@ public class InspectModeListener implements Listener {
                         data.inventory(),
                         data.gameMode(),
                         data.invisible());
-                player.toBukkitPlayer().teleport(target.getLocation());
+                player.asBukkitPlayer().teleport(target.getLocation());
             }
-            return;
         }
-
-        GuardianPlayer target = playersManager.getPlayer(data.target());
-        apply_effect(type, target);
-
     }
 
     private void apply_effect(String type, GuardianPlayer target) {

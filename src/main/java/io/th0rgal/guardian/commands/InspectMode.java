@@ -78,8 +78,8 @@ public class InspectMode {
 
                     GuardianPlayer target = playersManager.getPlayer((Player) args[0]);
                     if (!target.isInspecting())
-                        changeInspectMode(admin, target.toBukkitPlayer());
-                    admin.teleport(target.toBukkitPlayer());
+                        changeInspectMode(admin, target.asBukkitPlayer());
+                    admin.teleport(target.asBukkitPlayer());
                 });
     }
 

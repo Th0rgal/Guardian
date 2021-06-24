@@ -66,7 +66,7 @@ public class GuardianPlayer {
         return disabledNodes.remove(nodeClass);
     }
 
-    public Player toBukkitPlayer() {
+    public Player asBukkitPlayer() {
         return player;
     }
 
