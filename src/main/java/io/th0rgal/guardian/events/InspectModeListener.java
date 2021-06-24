@@ -10,7 +10,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.entity.EntityPickupItemEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
@@ -34,9 +36,25 @@ public class InspectModeListener implements Listener {
         this.random = new Random();
     }
 
+    @EventHandler
+    public void onInspectingPickupItem(EntityPickupItemEvent event) {
+        if (event.getEntity() instanceof Player player && playersManager.getPlayer(player).isInspecting())
+            event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onInspectingDropItem(PlayerDropItemEvent event) {
+        if (playersManager.getPlayer(event.getPlayer()).isInspecting()) {
+            ItemStack item = event.getItemDrop().getItemStack();
+            if (item != null && item.hasItemMeta()
+                    && item.getItemMeta().getPersistentDataContainer()
+                    .get(inspectMode.key, PersistentDataType.STRING) != null)
+                event.setCancelled(true);
+        }
+    }
+
     @EventHandler(priority = EventPriority.HIGH)
-    public void onRightClickTarget(PlayerInteractAtEntityEvent event) {
-        Bukkit.broadcastMessage("RIGHTCLICKED");
+    public void onRightClickTarget(PlayerInteractEntityEvent event) {
         if (event.getRightClicked() instanceof Player targetPlayer) {
             Player player = event.getPlayer();
             if (!playersManager.getPlayer(event.getPlayer()).isInspecting())
