@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.config;
+package io.th0rgal.guardian.storage.config;
 
 import org.bukkit.plugin.java.JavaPlugin;
 

@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.config.language;
+package io.th0rgal.guardian.storage.config.language;
 
 import net.kyori.adventure.text.format.TextColor;
 

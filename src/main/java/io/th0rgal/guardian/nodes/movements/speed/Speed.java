@@ -3,7 +3,7 @@ package io.th0rgal.guardian.nodes.movements.speed;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punisher.PunishersManager;
-import io.th0rgal.guardian.config.NodeConfig;
+import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.nodes.Node;
 import io.th0rgal.guardian.punisher.SerializedPunisher;
 import org.bukkit.*;

@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.config;
+package io.th0rgal.guardian.storage.config;
 
 public enum Config {
 

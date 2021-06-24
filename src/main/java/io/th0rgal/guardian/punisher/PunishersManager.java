@@ -1,9 +1,9 @@
 package io.th0rgal.guardian.punisher;
 
 import io.th0rgal.guardian.GuardianPlayer;
-import io.th0rgal.guardian.config.Configuration;
-import io.th0rgal.guardian.config.PunisherAction;
-import io.th0rgal.guardian.config.PunisherConfig;
+import io.th0rgal.guardian.storage.config.Configuration;
+import io.th0rgal.guardian.storage.config.PunisherAction;
+import io.th0rgal.guardian.storage.config.PunisherConfig;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;

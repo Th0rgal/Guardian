@@ -2,7 +2,7 @@ package io.th0rgal.guardian.events;
 
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.commands.InspectData;
-import io.th0rgal.guardian.config.language.Message;
+import io.th0rgal.guardian.storage.config.language.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;

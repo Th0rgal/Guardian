@@ -2,7 +2,7 @@ package io.th0rgal.guardian.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import io.th0rgal.guardian.GuardianPlayer;
-import io.th0rgal.guardian.config.language.LanguageConfiguration;
+import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.events.PlayersManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 

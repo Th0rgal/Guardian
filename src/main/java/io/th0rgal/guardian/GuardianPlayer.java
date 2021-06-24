@@ -1,8 +1,8 @@
 package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.commands.InspectData;
-import io.th0rgal.guardian.config.language.LanguageConfiguration;
-import io.th0rgal.guardian.config.language.Message;
+import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
+import io.th0rgal.guardian.storage.config.language.Message;
 import io.th0rgal.guardian.nodes.Node;
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.BanList;

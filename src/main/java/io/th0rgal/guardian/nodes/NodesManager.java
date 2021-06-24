@@ -1,8 +1,8 @@
 package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.punisher.PunishersManager;
-import io.th0rgal.guardian.config.Configuration;
-import io.th0rgal.guardian.config.NodeConfig;
+import io.th0rgal.guardian.storage.config.Configuration;
+import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.combat.highcps.HighCPS;
 import io.th0rgal.guardian.nodes.combat.reach.Reach;

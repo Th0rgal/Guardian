@@ -2,9 +2,9 @@ package io.th0rgal.guardian.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
 import io.th0rgal.guardian.events.PlayersManager;
-import io.th0rgal.guardian.config.language.LanguageConfiguration;
-import io.th0rgal.guardian.config.language.Message;
-import io.th0rgal.guardian.config.language.MessageColor;
+import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
+import io.th0rgal.guardian.storage.config.language.Message;
+import io.th0rgal.guardian.storage.config.language.MessageColor;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.Component;
 import org.bukkit.plugin.java.JavaPlugin;

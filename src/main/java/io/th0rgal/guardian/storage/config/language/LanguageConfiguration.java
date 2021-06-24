@@ -1,6 +1,6 @@
-package io.th0rgal.guardian.config.language;
+package io.th0rgal.guardian.storage.config.language;
 
-import io.th0rgal.guardian.config.Configuration;
+import io.th0rgal.guardian.storage.config.Configuration;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
