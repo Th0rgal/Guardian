@@ -1,7 +1,10 @@
 package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.commands.InspectData;
+import io.th0rgal.guardian.config.language.LanguageConfiguration;
+import io.th0rgal.guardian.config.language.Message;
 import io.th0rgal.guardian.nodes.Node;
+import net.kyori.adventure.audience.Audience;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -17,6 +20,8 @@ import java.util.UUID;
 public class GuardianPlayer {
 
     private final Player player;
+    public final Audience audience;
+    private final LanguageConfiguration lang;
     private final Map<String, Double> scores;
     private final HashSet<Class<? extends Node>> disabledNodes;
     private final Map<Class<? extends Node>, Object> data;
@@ -27,8 +32,10 @@ public class GuardianPlayer {
     private boolean frozen = false;
     private InspectData inspectData;
 
-    public GuardianPlayer(Player player) {
+    public GuardianPlayer(Player player, Audience audience, LanguageConfiguration lang) {
         this.player = player;
+        this.audience = audience;
+        this.lang = lang;
         this.scores = new HashMap<>();
         this.disabledNodes = new HashSet<>();
         this.data = new HashMap<>();
@@ -68,6 +75,10 @@ public class GuardianPlayer {
 
     public Player asBukkitPlayer() {
         return player;
+    }
+
+    public void message(Message message) {
+        audience.sendMessage(lang.getRich(Message.PREFIX).color(Message.PREFIX.color).append(lang.getRich(message)));
     }
 
     public UUID getId() {

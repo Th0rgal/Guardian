@@ -6,9 +6,11 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.punisher.PunishersManager;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -29,11 +31,15 @@ public class PlayersManager implements Listener {
     private final Map<UUID, GuardianPlayer> players = new HashMap<>();
     private final Database database;
     private final PunishersManager punisher;
+    private final BukkitAudiences adventure;
+    private final LanguageConfiguration lang;
 
-    public PlayersManager(JavaPlugin plugin, PunishersManager punisher) {
+    public PlayersManager(JavaPlugin plugin, PunishersManager punisher, BukkitAudiences adventure, LanguageConfiguration lang) {
         this.database = new SQLite(plugin, punisher.getPunishers(), "punishers");
         database.load();
         this.punisher = punisher;
+        this.adventure = adventure;
+        this.lang = lang;
         for (Player player : Bukkit.getOnlinePlayers())
             loadPlayer(player);
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -81,7 +87,7 @@ public class PlayersManager implements Listener {
     }
 
     private void loadPlayer(Player player) {
-        GuardianPlayer guardianPlayer = new GuardianPlayer(player);
+        GuardianPlayer guardianPlayer = new GuardianPlayer(player, this.adventure.player(player), lang);
         for (String punisher : punisher.getPunishers())
             guardianPlayer.setScore(punisher, database.getScore(player.getUniqueId(), punisher));
         players.put(player.getUniqueId(), guardianPlayer);

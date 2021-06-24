@@ -22,7 +22,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class InspectMode {
 
-    private final JavaPlugin plugin;
     public final BukkitAudiences adventure;
     public final LanguageConfiguration language;
     private final PlayersManager playersManager;
@@ -32,7 +31,6 @@ public class InspectMode {
     private final ItemStack[] inspectInventory;
 
     public InspectMode(JavaPlugin plugin, BukkitAudiences adventure, LanguageConfiguration language, PlayersManager playersManager) {
-        this.plugin = plugin;
         this.adventure = adventure;
         this.language = language;
         this.playersManager = playersManager;
@@ -50,7 +48,7 @@ public class InspectMode {
                 getItem(Material.GLOBE_BANNER_PATTERN, Message.INFO_ITEM_NAME, "info")
         };
         Bukkit.getPluginManager().registerEvents(
-                new InspectModeListener(plugin, this, playersManager),
+                new InspectModeListener(playersManager, key),
                 plugin);
     }
 

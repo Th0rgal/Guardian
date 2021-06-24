@@ -1,10 +1,10 @@
 package io.th0rgal.guardian.commands;
 
 import dev.jorel.commandapi.CommandAPICommand;
+import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.events.PlayersManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
-import org.bukkit.entity.Player;
 
 public class InfoPlayer {
 
@@ -19,8 +19,8 @@ public class InfoPlayer {
         this.playersManager = playersManager;
     }
 
-    public void showMenu(Player player) {
-        this.adventure.player(player);
+    public void showMenu(GuardianPlayer player) {
+        //player.audience.openBook();
     }
 
     public CommandAPICommand getCommand() {
