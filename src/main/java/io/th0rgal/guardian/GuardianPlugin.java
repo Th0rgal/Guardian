@@ -9,7 +9,7 @@ import io.th0rgal.guardian.storage.config.MainConfig;
 import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.NodesManager;
-import io.th0rgal.guardian.punisher.PunishersManager;
+import io.th0rgal.guardian.punishers.PunishersManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;

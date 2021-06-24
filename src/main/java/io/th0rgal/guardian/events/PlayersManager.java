@@ -7,7 +7,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
-import io.th0rgal.guardian.punisher.PunishersManager;
+import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.Database;
 import io.th0rgal.guardian.storage.SQLite;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;

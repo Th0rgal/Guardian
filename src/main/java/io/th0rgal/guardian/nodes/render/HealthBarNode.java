@@ -7,7 +7,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedWatchableObject;
-import io.th0rgal.guardian.punisher.PunishersManager;
+import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.nodes.Node;

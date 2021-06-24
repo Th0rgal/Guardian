@@ -1,4 +1,4 @@
-package io.th0rgal.guardian.punisher;
+package io.th0rgal.guardian.punishers;
 
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.storage.config.Configuration;
