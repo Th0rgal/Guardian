@@ -77,8 +77,8 @@ public class GuardianPlayer {
         return player;
     }
 
-    public void message(Message message) {
-        audience.sendMessage(lang.getRich(Message.PREFIX).color(Message.PREFIX.color).append(lang.getRich(message)));
+    public void message(Message message, String... placeholders) {
+        audience.sendMessage(lang.getRich(Message.PREFIX).color(Message.PREFIX.color).append(lang.getRich(message, placeholders)));
     }
 
     public UUID getId() {

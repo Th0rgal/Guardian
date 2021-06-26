@@ -19,7 +19,11 @@ public enum Message {
     FREEZE_ITEM_NAME("items.freeze_item_name"),
     KILL_ITEM_NAME("items.kill_item_name"),
     BAN_ITEM_NAME("items.ban_item_name"),
-    INFO_ITEM_NAME("items.info_item_name");
+    INFO_ITEM_NAME("items.info_item_name"),
+
+    INFOVIEW_TITLE("infoview.title"),
+    INFOVIEW_AUTHOR("infoview.author"),
+    INFOVIEW_PUNISHER_LINE("infoview.punisher_line");
 
     private final String path;
     public final TextColor color;

@@ -65,12 +65,12 @@ public class PunishersManager {
 
             if (action.hasAlert())
                 adventure.sender(Bukkit.getConsoleSender()).sendMessage(
-                        parser.parse(action.getAlert().replace("{player}", player.asBukkitPlayer().getName()))
+                        parser.parse(action.getAlert().replace("<player>", player.asBukkitPlayer().getName()))
                 );
 
             if (action.hasCommands())
                 for (String command : action.getCommands())
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("{player}", player.asBukkitPlayer().getName()));
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("<player>", player.asBukkitPlayer().getName()));
         }
     }
 

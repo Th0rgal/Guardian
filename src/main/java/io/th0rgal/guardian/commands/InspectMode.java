@@ -29,8 +29,11 @@ public class InspectMode {
 
     private final LegacyComponentSerializer displayNameSerializer;
     private final ItemStack[] inspectInventory;
+    private final InfoPlayer infoPlayer;
 
-    public InspectMode(JavaPlugin plugin, BukkitAudiences adventure, LanguageConfiguration language, PlayersManager playersManager) {
+    public InspectMode(JavaPlugin plugin, BukkitAudiences adventure,
+                       LanguageConfiguration language, PlayersManager playersManager,
+                       InfoPlayer infoPlayer) {
         this.adventure = adventure;
         this.language = language;
         this.playersManager = playersManager;
@@ -48,8 +51,9 @@ public class InspectMode {
                 getItem(Material.GLOBE_BANNER_PATTERN, Message.INFO_ITEM_NAME, "info")
         };
         Bukkit.getPluginManager().registerEvents(
-                new InspectModeListener(playersManager, key),
+                new InspectModeListener(playersManager, key, infoPlayer),
                 plugin);
+        this.infoPlayer = infoPlayer;
     }
 
     private ItemStack getItem(Material material, Message name, String data) {

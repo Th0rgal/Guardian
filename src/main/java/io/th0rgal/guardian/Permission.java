@@ -4,6 +4,7 @@ public enum Permission {
 
 
     USE_COMMAND_FREEZE("guardian.freeze"),
+    USE_COMMAND_INFO("guardian.info"),
     USE_COMMAND_INSPECT("guardian.inspect");
 
     private final String permission;

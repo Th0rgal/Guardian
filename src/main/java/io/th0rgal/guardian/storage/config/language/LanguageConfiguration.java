@@ -18,8 +18,8 @@ public class LanguageConfiguration extends Configuration {
         return super.getString(entry.toString());
     }
 
-    public Component getRich(Message entry) {
-        return this.parser.parse(get(entry));
+    public Component getRich(Message entry, String... placeholders) {
+        return this.parser.parse(get(entry), placeholders);
     }
 
 }

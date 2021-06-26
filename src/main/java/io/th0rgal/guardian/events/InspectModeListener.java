@@ -1,6 +1,7 @@
 package io.th0rgal.guardian.events;
 
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.commands.InfoPlayer;
 import io.th0rgal.guardian.commands.InspectData;
 import io.th0rgal.guardian.storage.config.language.Message;
 import org.bukkit.Bukkit;
@@ -26,11 +27,13 @@ public class InspectModeListener implements Listener {
     private final PlayersManager playersManager;
     private final NamespacedKey key;
     private final Random random;
+    private final InfoPlayer infoPlayer;
 
-    public InspectModeListener(PlayersManager playersManager, NamespacedKey key) {
+    public InspectModeListener(PlayersManager playersManager, NamespacedKey key, InfoPlayer infoPlayer) {
         this.playersManager = playersManager;
         this.key = key;
         this.random = new Random();
+        this.infoPlayer = infoPlayer;
     }
 
     @EventHandler
@@ -127,7 +130,10 @@ public class InspectModeListener implements Listener {
                 target.ban();
                 player.message(Message.TARGET_BANNED);
             }
-            case "info" -> target.getScores();
+            case "info" -> {
+                infoPlayer.showMenu(player, target);
+                target.getScores();
+            }
         }
 
     }

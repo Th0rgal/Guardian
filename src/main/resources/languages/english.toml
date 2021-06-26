@@ -17,3 +17,8 @@ freeze_item_name = "<#4fcdf0>Freeze the targeted player"
 kill_item_name = "<#e36659>Kill the targeted player"
 ban_item_name = "<#805753>Ban the targeted player"
 info_item_name = "<#c2c9ab>Show targeted player stats"
+
+[infoview]
+title = "<player> informations"
+author = "<gradient:#F5867B:#FAC987>Guardian</gradient>"
+punisher_line = "<punisher> : <score>"
