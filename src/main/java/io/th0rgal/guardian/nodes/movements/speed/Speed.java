@@ -8,10 +8,7 @@ import io.th0rgal.guardian.nodes.Node;
 import io.th0rgal.guardian.punishers.SerializedPunisher;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.type.Bed;
-import org.bukkit.block.data.type.Fence;
-import org.bukkit.block.data.type.Slab;
-import org.bukkit.block.data.type.TrapDoor;
+import org.bukkit.block.data.type.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -81,7 +78,7 @@ public class Speed extends Node implements Listener {
         if (location.getY() != location.getBlockY())
             lastJump.put(player.getUniqueId(), System.currentTimeMillis());
 
-        double maxSpeed = player.getWalkSpeed() * 1.368;
+        double maxSpeed = player.getWalkSpeed() * 1.45;
         SpeedData speedData = (SpeedData) guardianPlayer.getData(this.getClass());
         if (speedData == null) {
             speedData = new SpeedData();
@@ -90,14 +87,15 @@ public class Speed extends Node implements Listener {
 
         boolean onGround = false;
         if (to.getY() - from.getY() == 0) {
-            if (speedData.isOnGround()) {
+            if (speedData.isOnGround())
                 onGround = true;
-            }
-        } else {
+        } else
             speedData.setLastJump();
+        if (!onGround) {
+            maxSpeed *= 1.3;
         }
-        if (!onGround)
-            maxSpeed *= 1.252;
+        if (location.getBlock().getType() == Material.DIRT_PATH)
+            maxSpeed *= 1.6;
 
         if (isOnIce(player)) {
             speedData.setOnIce();
@@ -122,11 +120,15 @@ public class Speed extends Node implements Listener {
                 && !blockLocation.getBlock().isLiquid()
                 && !nonCubicBlocksNear(location)
                 && isAir(above.getBlock().getType())) {
+            Bukkit.broadcastMessage("player: " + guardianPlayer.asBukkitPlayer().getName() + " speed: " + speed + "  maxspeed: " + maxSpeed + " ping: " + guardianPlayer.getPing());
 
             if (rollback)
                 event.setCancelled(true);
             punishersManager.add(guardianPlayer, serializedPunisher.name(), serializedPunisher.addition());
             punishersManager.multiply(guardianPlayer, serializedPunisher.name(), serializedPunisher.multiply());
+
+            Bukkit.broadcastMessage("location:" + location.getBlock().getType());
+            Bukkit.broadcastMessage("location2:" + blockLocation.getBlock().getType());
         }
 
     }
@@ -154,6 +156,7 @@ public class Speed extends Node implements Listener {
                 for (int z = -1; z <= 1; z++) {
                     Block block = location.getBlock().getRelative(x, y, z);
                     if (block.getBlockData() instanceof Slab
+                            || block.getBlockData() instanceof Stairs
                             || block.getBlockData() instanceof Bed
                             || block.getBlockData() instanceof Fence
                             || block.getBlockData() instanceof TrapDoor)
