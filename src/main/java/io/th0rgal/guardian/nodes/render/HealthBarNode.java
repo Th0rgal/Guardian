@@ -55,7 +55,7 @@ public class HealthBarNode extends Node implements Listener {
                                 break;
                             }
                         if (isDisabledFor(playersManager.getPlayer(player))
-                                || player == entity
+                                || player.getEntityId() == entityId
                                 || !(entity instanceof LivingEntity)
                                 || entity instanceof Wither
                                 || entity instanceof EnderDragon
