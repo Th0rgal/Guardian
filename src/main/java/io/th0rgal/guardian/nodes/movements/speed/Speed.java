@@ -159,7 +159,8 @@ public class Speed extends Node implements Listener {
                             || block.getBlockData() instanceof Stairs
                             || block.getBlockData() instanceof Bed
                             || block.getBlockData() instanceof Fence
-                            || block.getBlockData() instanceof TrapDoor)
+                            || block.getBlockData() instanceof TrapDoor
+                            || block.getBlockData() instanceof Farmland)
                         return true;
                 }
         return false;
