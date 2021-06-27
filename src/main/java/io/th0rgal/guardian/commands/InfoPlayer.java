@@ -29,9 +29,11 @@ public class InfoPlayer {
 
     public Component getReport(GuardianPlayer target) {
         Component output = language.getRich(Message.INFOVIEW_TITLE, "player", target.asBukkitPlayer().getName());
+        output = output.append(Component.text("\n")).append(language.getRich(Message.INFOVIEW_PUNISHER_LINE,
+                "punisher", "ping", "score", String.valueOf(target.getPing())));
         for (Map.Entry<String, Double> node : target.getScores().entrySet())
             output = output.append(Component.text("\n")).append(language.getRich(Message.INFOVIEW_PUNISHER_LINE,
-                    "punisher", node.getKey(), "score", node.getValue().toString()));
+                    "punisher", node.getKey(), "score", String.format("%,.2f", node.getValue())));
         return output;
     }
 
@@ -48,9 +50,10 @@ public class InfoPlayer {
                 .withArguments(new PlayerArgument("player"))
                 .executes((sender, args) -> {
                     GuardianPlayer target = playersManager.getPlayer((Player) args[0]);
-
                     if (sender instanceof Player player)
                         showMenu(playersManager.getPlayer(player), target);
+                    else
+                        this.adventure.sender(sender).sendMessage(getReport(target));
                 });
     }
 
