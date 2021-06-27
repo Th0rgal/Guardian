@@ -39,7 +39,6 @@ public class InspectMode {
         this.playersManager = playersManager;
         this.key = new NamespacedKey(plugin, "data");
         this.displayNameSerializer = LegacyComponentSerializer.builder()
-                .character('§')
                 .hexColors()
                 .useUnusualXRepeatedCharacterHexFormat()
                 .build();
