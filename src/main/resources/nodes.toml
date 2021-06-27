@@ -69,7 +69,7 @@ tolerance = 1.02 # accepts up to 2% more than the vanilla limit
 punisher = "movement"
 concurrent = true # will be activated even if a higher check is
 add = 1.0
-
+multiply = 1.25
 
 # RENDER
 

@@ -34,7 +34,7 @@ concurrent = true # will be activated even if a higher check is
 alert = "<player> has an extremely suspicious behavior according to the movement punisher"
 
 [[movement.action]]
-threshold = 50.0
+threshold = 30.0
 concurrent = true # will be activated even if a higher check is
 commands = [
     "ban <player> 'You have been automatically banned for cheating'"
