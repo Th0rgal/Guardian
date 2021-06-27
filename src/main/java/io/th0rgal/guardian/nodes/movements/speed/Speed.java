@@ -78,7 +78,7 @@ public class Speed extends Node implements Listener {
         if (location.getY() != location.getBlockY())
             lastJump.put(player.getUniqueId(), System.currentTimeMillis());
 
-        double maxSpeed = player.getWalkSpeed() * 1.45;
+        double maxSpeed = player.getWalkSpeed() * 1.4;
         SpeedData speedData = (SpeedData) guardianPlayer.getData(this.getClass());
         if (speedData == null) {
             speedData = new SpeedData();
@@ -114,21 +114,17 @@ public class Speed extends Node implements Listener {
         }
 
         maxSpeed = maxSpeed * (1D + ((double) player.getPing()) / 2000D);
+        maxSpeed *= tolerance;
 
         if ((location.getY() != location.getBlockY() || onGround)
                 && speed > maxSpeed && player.getFallDistance() < 0.4
                 && !blockLocation.getBlock().isLiquid()
                 && !nonCubicBlocksNear(location)
                 && isAir(above.getBlock().getType())) {
-            Bukkit.broadcastMessage("player: " + guardianPlayer.asBukkitPlayer().getName() + " speed: " + speed + "  maxspeed: " + maxSpeed + " ping: " + guardianPlayer.getPing());
-
             if (rollback)
                 event.setCancelled(true);
             punishersManager.add(guardianPlayer, serializedPunisher.name(), serializedPunisher.addition());
             punishersManager.multiply(guardianPlayer, serializedPunisher.name(), serializedPunisher.multiply());
-
-            Bukkit.broadcastMessage("location:" + location.getBlock().getType());
-            Bukkit.broadcastMessage("location2:" + blockLocation.getBlock().getType());
         }
 
     }
