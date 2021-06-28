@@ -24,6 +24,7 @@ min_cps = 16.0
 add = 5.0
 multiply = 1.10
 
+
 # This node will analyse the distance between the players and the entities they are attacking
 [reach]
 enabled = true
@@ -58,8 +59,23 @@ concurrent = true
 min_reach = 5.0
 add = 10.0
 
+
 # MOVEMENTS
 
+# This node will analyze player movements to detect flyhack
+[flight]
+enabled = true
+rollback = true # cancels suspicious movements
+tolerance = 1.01 # accepts up to 1% more than the vanilla limit
+
+[flight.punisher]
+punisher = "movement"
+concurrent = true # will be activated even if a higher check is
+add = 1.0
+multiply = 1.25
+
+
+# This node will analyze player movements to detect speedhack
 [speed]
 enabled = true
 rollback = true # cancels suspicious movements
@@ -70,6 +86,7 @@ punisher = "movement"
 concurrent = true # will be activated even if a higher check is
 add = 1.0
 multiply = 1.25
+
 
 # RENDER
 
