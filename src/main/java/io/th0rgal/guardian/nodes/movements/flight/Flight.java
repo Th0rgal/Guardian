@@ -68,7 +68,8 @@ public class Flight extends Node implements Listener {
                 || player.isFlying()
                 || player.hasPotionEffect(PotionEffectType.SPEED)
                 || player.hasPotionEffect(PotionEffectType.JUMP)
-                || player.hasPotionEffect(PotionEffectType.LEVITATION)) {
+                || player.hasPotionEffect(PotionEffectType.LEVITATION)
+                || isDisabledFor(guardianPlayer)) {
             return;
         }
 

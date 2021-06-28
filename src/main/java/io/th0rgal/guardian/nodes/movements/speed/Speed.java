@@ -71,7 +71,8 @@ public class Speed extends Node implements Listener {
                 || player.getAllowFlight()
                 || player.isSwimming()
                 || player.isGliding()
-                || player.isFlying()) {
+                || player.isFlying()
+                || isDisabledFor(guardianPlayer)) {
             return;
         }
 

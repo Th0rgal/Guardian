@@ -1,5 +1,6 @@
 package io.th0rgal.guardian.nodes.combat.reach;
 
+import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
@@ -52,7 +53,8 @@ public class Reach extends Node implements Listener {
     public void onPlayerDamages(final EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player player) || player.getGameMode() != GameMode.SURVIVAL)
             return;
-
-        applySerializedTrigger(playersManager.getPlayer(player), triggers, player.getLocation().distance(event.getEntity().getLocation()));
+        GuardianPlayer guardianPlayer = playersManager.getPlayer(player);
+        if (!isDisabledFor(guardianPlayer))
+            applySerializedTrigger(guardianPlayer, triggers, player.getLocation().distance(event.getEntity().getLocation()));
     }
 }

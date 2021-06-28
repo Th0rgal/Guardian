@@ -54,6 +54,8 @@ public class HighCPS extends Node implements Listener {
         if (event.getAction() != Action.LEFT_CLICK_AIR)
             return;
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
+        if (isDisabledFor(player))
+            return;
         CPSQueue cpsQueue = (CPSQueue) player.getData(this.getClass());
         if (cpsQueue == null) {
             cpsQueue = new CPSQueue((int) configuration.getLong("historic"));
