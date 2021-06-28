@@ -15,7 +15,7 @@ public record JournalCommand(GuardianJournal journal, BukkitAudiences adventure,
         return new CommandAPICommand("journal")
                 .withAliases("logs")
                 .withArguments(new BooleanArgument("subscribe"))
-                .withPermission(Permission.USE_COMMAND_LOGS.toString())
+                .withPermission(Permission.USE_COMMAND_JOURNAL.toString())
                 .executes((sender, args) -> {
                     boolean enable = (boolean) args[0];
                     Message message;
@@ -30,7 +30,7 @@ public record JournalCommand(GuardianJournal journal, BukkitAudiences adventure,
     public CommandAPICommand getToggleCommand() {
         return new CommandAPICommand("journal")
                 .withAliases("logs")
-                .withPermission(Permission.USE_COMMAND_LOGS.toString())
+                .withPermission(Permission.USE_COMMAND_JOURNAL.toString())
                 .executes((sender, args) -> {
                     Message message;
                     if (journal().isSubscribed(sender)) {
