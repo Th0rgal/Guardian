@@ -124,8 +124,10 @@ public class Speed extends Node implements Listener {
                 && isAir(above.getBlock().getType())) {
             if (rollback)
                 event.setCancelled(true);
-            punishersManager.add(guardianPlayer, serializedPunisher.name(), serializedPunisher.addition());
-            punishersManager.multiply(guardianPlayer, serializedPunisher.name(), serializedPunisher.multiply());
+            punish(guardianPlayer,
+                    serializedPunisher.name(),
+                    serializedPunisher.addition(),
+                    serializedPunisher.multiply());
         }
 
     }
@@ -157,7 +159,8 @@ public class Speed extends Node implements Listener {
                             || block.getBlockData() instanceof Bed
                             || block.getBlockData() instanceof Fence
                             || block.getBlockData() instanceof TrapDoor
-                            || block.getBlockData() instanceof Farmland)
+                            || block.getBlockData() instanceof Farmland
+                            || block.getBlockData() instanceof SeaPickle)
                         return true;
                 }
         return false;

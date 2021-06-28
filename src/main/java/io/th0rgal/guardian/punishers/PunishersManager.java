@@ -30,23 +30,11 @@ public class PunishersManager {
      *
      * @param player   The player to update
      * @param punisher The punisher's name
-     * @param amount   Score to add (can be negative)
+     * @param add      Score to add (can be negative)
+     * @param multiply Scaler to multiply with
      */
-    public void add(GuardianPlayer player, String punisher, double amount) {
-        double newScore = Math.max(player.getScore(punisher) + amount, 0);
-        player.setScore(punisher, newScore);
-        performActions(punisher, player, newScore);
-    }
-
-    /**
-     * To update the punisher score of a Player
-     *
-     * @param player   The player to update
-     * @param punisher The punisher's name
-     * @param amount   Scalar modifier
-     */
-    public void multiply(GuardianPlayer player, String punisher, double amount) {
-        double newScore = Math.max(player.getScore(punisher) * amount, 0);
+    public void punish(GuardianPlayer player, String punisher, double add, double multiply) {
+        double newScore = Math.max(player.getScore(punisher) * multiply + add, 0);
         player.setScore(punisher, newScore);
         performActions(punisher, player, newScore);
     }

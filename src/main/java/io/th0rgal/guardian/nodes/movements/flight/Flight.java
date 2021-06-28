@@ -84,8 +84,10 @@ public class Flight extends Node implements Listener {
                     || (move.getY() == 0 && speed > 0.37 * currentTolerance)) {
                 if (rollback)
                     event.setCancelled(true);
-                punishersManager.add(guardianPlayer, serializedPunisher.name(), serializedPunisher.addition());
-                punishersManager.multiply(guardianPlayer, serializedPunisher.name(), serializedPunisher.multiply());
+                punish(guardianPlayer,
+                        serializedPunisher.name(),
+                        serializedPunisher.addition(),
+                        serializedPunisher.multiply());
             }
         }
     }

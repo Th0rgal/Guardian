@@ -5,6 +5,7 @@ import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.SerializedPunisherTrigger;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -41,14 +42,17 @@ public abstract class Node {
         return player.isDisabled(this.getClass());
     }
 
+    protected void punish(GuardianPlayer player, String name, double addition, double multiply) {
+        punishersManager.punish(player, name, addition, multiply);
+    }
+
     protected void applySerializedTrigger(GuardianPlayer player, List<SerializedPunisherTrigger> triggers, double value) {
         boolean triggered = false;
         for (SerializedPunisherTrigger trigger : triggers) {
             if ((triggered && !trigger.concurrent()) || value < trigger.trigger())
                 continue;
             triggered = true;
-            punishersManager.add(player, trigger.name(), trigger.addition());
-            punishersManager.multiply(player, trigger.name(), trigger.multiply());
+            punish(player, trigger.name(), trigger.addition(), trigger.multiply());
         }
     }
 }
