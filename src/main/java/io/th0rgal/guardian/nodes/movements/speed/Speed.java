@@ -1,5 +1,6 @@
 package io.th0rgal.guardian.nodes.movements.speed;
 
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.PunishersManager;
@@ -27,8 +28,9 @@ public class Speed extends Node implements Listener {
     private final boolean rollback;
     private final double tolerance;
 
-    public Speed(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
-        super(plugin, playersManager, punishersManager, name, configuration);
+    public Speed(JavaPlugin plugin, GuardianJournal journal, PlayersManager playersManager,
+                 PunishersManager punishersManager, String name, NodeConfig configuration) {
+        super(plugin, journal, playersManager, punishersManager, name, configuration);
         TomlTable punisherTable = configuration.getTable("punisher");
         rollback = configuration.getBoolean("rollback");
         tolerance = configuration.getDouble("tolerance");

@@ -31,11 +31,11 @@ public class GuardianPlugin extends JavaPlugin {
         LanguageConfiguration lang = new LanguageConfiguration(this, parser,
                 "languages/" + config.getString(Config.SETTINGS_LANGUAGE));
         BukkitAudiences adventure = BukkitAudiences.create(this);
-        GuardianJournal guardianJournal = new GuardianJournal(adventure);
-        PunishersManager punisher = new PunishersManager(this, new Configuration(this, "punishers"), guardianJournal, parser);
+        GuardianJournal guardianJournal = new GuardianJournal(adventure, lang, parser);
+        PunishersManager punisher = new PunishersManager(this, new Configuration(this, "punishers"), guardianJournal);
         playersManager = new PlayersManager(this, punisher, adventure, lang);
         new CommandsManager(this, guardianJournal, adventure, lang, playersManager).register();
-        new NodesManager(this, new Configuration(this, "nodes"), playersManager, punisher).enableAll();
+        new NodesManager(this, guardianJournal, new Configuration(this, "nodes"), playersManager, punisher).enableAll();
     }
 
     public void onDisable() {

@@ -1,5 +1,6 @@
 [plugin]
 prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
+journal_prefix = "<gradient:#F5867B:#FAC987>Journal</gradient> <#282B3F>| "
 
 [commands]
 not_a_player = "you must be a player to use this command"
@@ -10,10 +11,10 @@ player_frozen = "you have been successfully frozen"
 player_unfrozen = "you have been successfully unfrozen"
 target_killed = "the target player has been successfully killed"
 target_banned = "the target player has been successfully banned"
-logs_subscribed = "you were successfully registered to the plugin journal"
-logs_already_subscribed = "you were already registered to the plugin journal"
-logs_unsubscribed = "you were successfully unregistered to the plugin journal"
-logs_not_subscribed = "you were not registered to the plugin journal"
+journal_subscribed = "you were successfully registered to the plugin journal"
+journal_already_subscribed = "you were already registered to the plugin journal"
+journal_unsubscribed = "you were successfully unregistered to the plugin journal"
+journal_not_subscribed = "you were not registered to the plugin journal"
 
 [items]
 teleport_item_name = "<#47b594>Random teleportation to a player"
@@ -23,5 +24,5 @@ ban_item_name = "<#805753>Ban the targeted player"
 info_item_name = "<#c2c9ab>Show targeted player stats"
 
 [infoview]
-title = "<gradient:#F5867B:#FAC987><bold><player> info</bold></gradient>"
-punisher_line = "<bold><punisher></bold>: <score>"
+title = "<gradient:#F5867B:#FAC987><bold><player> info</gradient><reset>"
+punisher_line = "<#6B6B6B><underlined><punisher></underlined>: <#5C5C5C><score>"

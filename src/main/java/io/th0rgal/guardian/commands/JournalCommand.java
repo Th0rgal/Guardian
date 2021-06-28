@@ -20,10 +20,27 @@ public record JournalCommand(GuardianJournal journal, BukkitAudiences adventure,
                     boolean enable = (boolean) args[0];
                     Message message;
                     if (enable)
-                        message = journal.subscribe(sender) ? Message.LOGS_SUBSCRIBED : Message.LOGS_ALREADY_SUBSCRIBED;
+                        message = journal.subscribe(sender) ? Message.JOURNAL_SUBSCRIBED : Message.JOURNAL_ALREADY_SUBSCRIBED;
                     else
-                        message = journal.unsubscribe(sender) ? Message.LOGS_UNSUBSCRIBED : Message.LOGS_NOT_SUBSCRIBED;
-                    adventure.sender(sender).sendMessage(language.getRich(message));
+                        message = journal.unsubscribe(sender) ? Message.JOURNAL_UNSUBSCRIBED : Message.JOURNAL_NOT_SUBSCRIBED;
+                    adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX).append(language.getRich(message)));
+                });
+    }
+
+    public CommandAPICommand getToggleCommand() {
+        return new CommandAPICommand("journal")
+                .withAliases("logs")
+                .withPermission(Permission.USE_COMMAND_LOGS.toString())
+                .executes((sender, args) -> {
+                    Message message;
+                    if (journal().isSubscribed(sender)) {
+                        journal.unsubscribe(sender);
+                        message = Message.JOURNAL_UNSUBSCRIBED;
+                    } else {
+                        journal.subscribe(sender);
+                        message = Message.JOURNAL_SUBSCRIBED;
+                    }
+                    adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX).append(language.getRich(message)));
                 });
     }
 }

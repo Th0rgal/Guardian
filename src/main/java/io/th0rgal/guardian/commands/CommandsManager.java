@@ -25,9 +25,10 @@ public record CommandsManager(JavaPlugin plugin, GuardianJournal journal, Bukkit
                 .withSubcommand(inspectMode.getInspectCommand())
                 .withSubcommand(inspectMode.getInspectPlayerCommand())
                 .withSubcommand(journalCommand.getCommand())
+                .withSubcommand(journalCommand.getToggleCommand())
                 .executes((sender, args) -> {
                     this.adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX)
-                            .color(Message.PREFIX.color)
+                            .color(MessageColor.INFO.get())
                             .append(Component.text("This is an example message of type [INFO]")));
 
                     this.adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX)

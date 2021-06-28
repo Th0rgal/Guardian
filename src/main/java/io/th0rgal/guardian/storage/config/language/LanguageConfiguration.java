@@ -2,6 +2,7 @@ package io.th0rgal.guardian.storage.config.language;
 
 import io.th0rgal.guardian.storage.config.Configuration;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentBuilder;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,7 +20,7 @@ public class LanguageConfiguration extends Configuration {
     }
 
     public Component getRich(Message entry, String... placeholders) {
-        return this.parser.parse(get(entry), placeholders);
+        return Component.empty().color(entry.color).append(this.parser.parse(get(entry), placeholders));
     }
 
 }

@@ -5,6 +5,7 @@ import net.kyori.adventure.text.format.TextColor;
 public enum Message {
 
     PREFIX("plugin.prefix"),
+    JOURNAL_PREFIX("plugin.journal_prefix"),
 
     NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE),
     NOT_ENOUGH_PLAYERS("commands.not_enough_players", MessageColor.SEVERE),
@@ -14,10 +15,10 @@ public enum Message {
     PLAYER_UNFROZEN("commands.player_unfrozen", MessageColor.SUCCESS),
     TARGET_KILLED("commands.target_killed", MessageColor.SUCCESS),
     TARGET_BANNED("commands.target_banned", MessageColor.SUCCESS),
-    LOGS_SUBSCRIBED("commands.logs_subscribed", MessageColor.SUCCESS),
-    LOGS_ALREADY_SUBSCRIBED("commands.logs_already_subscribed", MessageColor.SEVERE),
-    LOGS_UNSUBSCRIBED("commands.logs_unsubscribed", MessageColor.SUCCESS),
-    LOGS_NOT_SUBSCRIBED("commands.logs_not_subscribed", MessageColor.SEVERE),
+    JOURNAL_SUBSCRIBED("commands.journal_subscribed", MessageColor.SUCCESS),
+    JOURNAL_ALREADY_SUBSCRIBED("commands.journal_already_subscribed", MessageColor.SEVERE),
+    JOURNAL_UNSUBSCRIBED("commands.journal_unsubscribed", MessageColor.SUCCESS),
+    JOURNAL_NOT_SUBSCRIBED("commands.journal_not_subscribed", MessageColor.SEVERE),
 
     TELEPORT_ITEM_NAME("items.teleport_item_name"),
     FREEZE_ITEM_NAME("items.freeze_item_name"),

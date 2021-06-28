@@ -7,6 +7,7 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.events.PacketEvent;
 import com.comphenix.protocol.wrappers.WrappedWatchableObject;
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
@@ -23,8 +24,9 @@ import java.util.Collections;
 
 public class HealthBarNode extends Node implements Listener {
 
-    public HealthBarNode(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
-        super(plugin, playersManager, punishersManager, name, configuration);
+    public HealthBarNode(JavaPlugin plugin, GuardianJournal journal, PlayersManager playersManager,
+                         PunishersManager punishersManager, String name, NodeConfig configuration) {
+        super(plugin, journal, playersManager, punishersManager, name, configuration);
     }
 
     @Override

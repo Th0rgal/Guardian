@@ -1,5 +1,6 @@
 package io.th0rgal.guardian.nodes.combat.reach;
 
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.PunishersManager;
@@ -23,8 +24,9 @@ public class Reach extends Node implements Listener {
 
     private final List<SerializedPunisherTrigger> triggers;
 
-    public Reach(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
-        super(plugin, playersManager, punishersManager, name, configuration);
+    public Reach(JavaPlugin plugin, GuardianJournal journal, PlayersManager playersManager,
+                 PunishersManager punishersManager, String name, NodeConfig configuration) {
+        super(plugin, journal, playersManager, punishersManager, name, configuration);
         triggers = new ArrayList<>();
         if (configuration.isArray("punishers"))
             for (Object punisherObject : configuration.getArray("punishers").toList()) {

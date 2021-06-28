@@ -9,6 +9,7 @@ import io.th0rgal.guardian.storage.config.language.Message;
 import io.th0rgal.guardian.events.InspectModeListener;
 import io.th0rgal.guardian.events.PlayersManager;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
+import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -72,7 +73,6 @@ public class InspectMode {
                 .executes((sender, args) -> {
                     if (!(sender instanceof Player admin)) {
                         this.adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX)
-                                .color(Message.NOT_A_PLAYER.color)
                                 .append(language.getRich(Message.NOT_A_PLAYER)));
                         return;
                     }
@@ -90,7 +90,6 @@ public class InspectMode {
                 .executes((sender, args) -> {
                     if (!(sender instanceof Player)) {
                         this.adventure.sender(sender).sendMessage(language.getRich(Message.PREFIX)
-                                .color(Message.NOT_A_PLAYER.color)
                                 .append(language.getRich(Message.NOT_A_PLAYER)));
                         return;
                     }

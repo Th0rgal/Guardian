@@ -5,12 +5,12 @@ decrease = 0.2 # decrease every minute
 [[combat.action]]
 threshold = 2.0
 concurrent = false # will not be activated if a higher check is
-log = "<player> is suspicious according to the combat punisher"
+log = "combat: <player> is suspicious"
 
 [[combat.action]]
 threshold = 5.0
 concurrent = true # will be activated even if a higher check is
-log = "<player> has an extremely suspicious behavior according to the combat punisher"
+log = "combat: <player> has an extremely suspicious behavior"
 
 [[combat.action]]
 threshold = 25.0
@@ -26,12 +26,12 @@ decrease = 1.0 # decrease every minute
 [[movement.action]]
 threshold = 1.0
 concurrent = false # will not be activated if a higher check is
-log = "<player> is suspicious according to the movement punisher"
+log = "movement: <player> is suspicious"
 
 [[movement.action]]
 threshold = 10.0
 concurrent = true # will be activated even if a higher check is
-log = "<player> has an extremely suspicious behavior according to the movement punisher"
+log = "movement: <player> has an extremely suspicious behavior"
 
 [[movement.action]]
 threshold = 30.0

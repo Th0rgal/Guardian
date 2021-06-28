@@ -1,5 +1,6 @@
 package io.th0rgal.guardian.nodes;
 
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.nodes.movements.flight.Flight;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.Configuration;
@@ -18,20 +19,24 @@ public class NodesManager {
 
     @FunctionalInterface
     interface NodeConstructor {
-        Node create(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig config);
+        Node create(JavaPlugin plugin, GuardianJournal journal, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig config);
     }
 
     private final JavaPlugin plugin;
+    private final GuardianJournal journal;
     private final Configuration nodesConfiguration;
     private final PlayersManager playersManager;
     private final PunishersManager punishersManager;
     private final List<Node> nodes = new ArrayList<>();
 
-    public NodesManager(JavaPlugin plugin, Configuration nodesConfiguration, PlayersManager playersManager, PunishersManager punishersManager) {
+    public NodesManager(JavaPlugin plugin, GuardianJournal journal, Configuration nodesConfiguration,
+                        PlayersManager playersManager, PunishersManager punishersManager) {
         this.plugin = plugin;
+        this.journal = journal;
         this.nodesConfiguration = nodesConfiguration;
         this.playersManager = playersManager;
         this.punishersManager = punishersManager;
+
         registerNode(HighCPS::new, "highcps");
         registerNode(Reach::new, "reach");
 
@@ -44,7 +49,7 @@ public class NodesManager {
     public void registerNode(NodeConstructor nodeCreator, String name) {
         NodeConfig config = new NodeConfig(nodesConfiguration, name);
         if (config.getBoolean("enabled"))
-            nodes.add(nodeCreator.create(plugin, playersManager, punishersManager, name, config));
+            nodes.add(nodeCreator.create(plugin, journal, playersManager, punishersManager, name, config));
     }
 
     public void enableAll() {

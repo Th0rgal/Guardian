@@ -5,7 +5,7 @@ import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.storage.config.Configuration;
 import io.th0rgal.guardian.storage.config.PunisherAction;
 import io.th0rgal.guardian.storage.config.PunisherConfig;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import io.th0rgal.guardian.storage.config.language.MessageColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -14,13 +14,11 @@ import java.util.*;
 public class PunishersManager {
 
     private final Map<String, PunisherConfig> actionsMap;
-    private final MiniMessage parser;
     private final GuardianJournal journal;
 
-    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration, GuardianJournal journal, MiniMessage parser) {
+    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration, GuardianJournal journal) {
         actionsMap = new HashMap<>();
         this.journal = journal;
-        this.parser = parser;
         for (String name : punishersConfiguration.getKeys())
             actionsMap.put(name, new PunisherConfig(punishersConfiguration, name));
     }
@@ -52,7 +50,7 @@ public class PunishersManager {
                 continue;
 
             if (action.hasLog())
-                this.journal.log(parser.parse(action.getLog(), "player", player.asBukkitPlayer().getName()));
+                this.journal.log(action.getLog(), MessageColor.WARNING, "player", player.asBukkitPlayer().getName());
 
             if (action.hasCommands())
                 for (String command : action.getCommands())

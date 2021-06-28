@@ -1,5 +1,6 @@
 package io.th0rgal.guardian.nodes;
 
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
@@ -13,13 +14,16 @@ import java.util.List;
 public abstract class Node {
 
     protected final JavaPlugin plugin;
+    protected final GuardianJournal journal;
     protected final PlayersManager playersManager;
     protected final PunishersManager punishersManager;
     protected final String name;
     protected final NodeConfig configuration;
 
-    public Node(JavaPlugin plugin, PlayersManager playersManager, PunishersManager punishersManager, String name, NodeConfig configuration) {
+    public Node(JavaPlugin plugin, GuardianJournal journal, PlayersManager playersManager,
+                PunishersManager punishersManager, String name, NodeConfig configuration) {
         this.plugin = plugin;
+        this.journal = journal;
         this.playersManager = playersManager;
         this.punishersManager = punishersManager;
         this.name = name;
