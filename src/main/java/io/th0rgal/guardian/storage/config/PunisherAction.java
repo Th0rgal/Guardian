@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PunisherAction {
 
-    private String alert;
+    private String log;
     private List<String> commands;
     private final double threshold;
     public final boolean concurrent;
@@ -14,16 +14,16 @@ public class PunisherAction {
         this.concurrent = concurrent;
     }
 
-    public boolean hasAlert() {
-        return alert != null;
+    public boolean hasLog() {
+        return log != null;
     }
 
-    public void setAlert(String alert) {
-        this.alert = alert;
+    public void setLog(String log) {
+        this.log = log;
     }
 
-    public String getAlert() {
-        return alert;
+    public String getLog() {
+        return log;
     }
 
     public boolean hasCommands() {

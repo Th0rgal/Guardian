@@ -1,3 +1,6 @@
 [settings]
 # Name of a language file, english.toml by default
 language = "english"
+
+[logger]
+save = true

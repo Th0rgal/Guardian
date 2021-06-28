@@ -14,6 +14,10 @@ public enum Message {
     PLAYER_UNFROZEN("commands.player_unfrozen", MessageColor.SUCCESS),
     TARGET_KILLED("commands.target_killed", MessageColor.SUCCESS),
     TARGET_BANNED("commands.target_banned", MessageColor.SUCCESS),
+    LOGS_SUBSCRIBED("commands.logs_subscribed", MessageColor.SUCCESS),
+    LOGS_ALREADY_SUBSCRIBED("commands.logs_already_subscribed", MessageColor.SEVERE),
+    LOGS_UNSUBSCRIBED("commands.logs_unsubscribed", MessageColor.SUCCESS),
+    LOGS_NOT_SUBSCRIBED("commands.logs_not_subscribed", MessageColor.SEVERE),
 
     TELEPORT_ITEM_NAME("items.teleport_item_name"),
     FREEZE_ITEM_NAME("items.freeze_item_name"),

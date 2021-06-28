@@ -10,6 +10,10 @@ player_frozen = "you have been successfully frozen"
 player_unfrozen = "you have been successfully unfrozen"
 target_killed = "the target player has been successfully killed"
 target_banned = "the target player has been successfully banned"
+logs_subscribed = "you were successfully registered to the plugin journal"
+logs_already_subscribed = "you were already registered to the plugin journal"
+logs_unsubscribed = "you were successfully unregistered to the plugin journal"
+logs_not_subscribed = "you were not registered to the plugin journal"
 
 [items]
 teleport_item_name = "<#47b594>Random teleportation to a player"

@@ -19,8 +19,8 @@ public class PunisherConfig {
         for (Object object : punishersConfig.getArray(prefix + "action").toList()) {
             TomlTable table = (TomlTable) object;
             PunisherAction action = new PunisherAction(table.getDouble("threshold"), table.getBoolean("concurrent"));
-            if (table.isString("alert"))
-                action.setAlert(table.getString("alert"));
+            if (table.isString("log"))
+                action.setLog(table.getString("log"));
             if (table.isArray("commands"))
                 action.setCommands((List<String>) (List<?>) table.getArray("commands").toList());
             actions.add(action);

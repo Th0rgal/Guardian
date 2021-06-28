@@ -1,10 +1,10 @@
 package io.th0rgal.guardian.punishers;
 
+import io.th0rgal.guardian.GuardianJournal;
 import io.th0rgal.guardian.GuardianPlayer;
 import io.th0rgal.guardian.storage.config.Configuration;
 import io.th0rgal.guardian.storage.config.PunisherAction;
 import io.th0rgal.guardian.storage.config.PunisherConfig;
-import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,12 +15,12 @@ public class PunishersManager {
 
     private final Map<String, PunisherConfig> actionsMap;
     private final MiniMessage parser;
-    private final BukkitAudiences adventure;
+    private final GuardianJournal journal;
 
-    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration, MiniMessage parser, BukkitAudiences adventure) {
+    public PunishersManager(JavaPlugin plugin, Configuration punishersConfiguration, GuardianJournal journal, MiniMessage parser) {
         actionsMap = new HashMap<>();
+        this.journal = journal;
         this.parser = parser;
-        this.adventure = adventure;
         for (String name : punishersConfiguration.getKeys())
             actionsMap.put(name, new PunisherConfig(punishersConfiguration, name));
     }
@@ -51,10 +51,8 @@ public class PunishersManager {
             else if (!action.concurrent)
                 continue;
 
-            if (action.hasAlert())
-                adventure.sender(Bukkit.getConsoleSender()).sendMessage(
-                        parser.parse(action.getAlert().replace("<player>", player.asBukkitPlayer().getName()))
-                );
+            if (action.hasLog())
+                this.journal.log(parser.parse(action.getLog(), "player", player.asBukkitPlayer().getName()));
 
             if (action.hasCommands())
                 for (String command : action.getCommands())

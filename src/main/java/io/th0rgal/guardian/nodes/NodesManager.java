@@ -9,7 +9,6 @@ import io.th0rgal.guardian.nodes.combat.highcps.HighCPS;
 import io.th0rgal.guardian.nodes.combat.reach.Reach;
 import io.th0rgal.guardian.nodes.movements.speed.Speed;
 import io.th0rgal.guardian.nodes.render.HealthBarNode;
-import net.bytebuddy.description.field.FieldList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
