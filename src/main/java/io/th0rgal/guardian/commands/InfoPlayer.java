@@ -39,8 +39,8 @@ public class InfoPlayer {
 
     public void showMenu(GuardianPlayer player, GuardianPlayer target) {
         player.audience.openBook(Book.book(
-                language.getRich(Message.INFOVIEW_TITLE, "player", target.asBukkitPlayer().getName()),
-                language.getRich(Message.INFOVIEW_AUTHOR),
+                Component.text("Guardian Info"),
+                Component.text("Guardian"),
                 getReport(target)));
     }
 
