@@ -83,7 +83,7 @@ public class Flight extends Node implements Listener {
             double currentTolerance = tolerance * (1D + ((double) player.getPing()) / 4000D);
             if (((move.getY() > 0 && !nonAirNear(from.subtract(move.clone().multiply(8)))
                     && (ySpeed > 0.17 || (ySpeed > 0.0835 * currentTolerance))))
-                    || (move.getY() == 0 && speed > 0.37 * currentTolerance)) {
+                    || (move.getY() == 0 && speed > 0.41 * currentTolerance)) {
                 if (rollback)
                     event.setCancelled(true);
                 punish(guardianPlayer,
