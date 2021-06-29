@@ -27,6 +27,7 @@ public enum Message {
     KILL_ITEM_NAME("items.kill_item_name"),
     BAN_ITEM_NAME("items.ban_item_name"),
     INFO_ITEM_NAME("items.info_item_name"),
+    EXIT_ITEM_NAME("items.exit_item_name"),
 
     INFOVIEW_TITLE("infoview.title"),
     INFOVIEW_AUTHOR("infoview.author"),

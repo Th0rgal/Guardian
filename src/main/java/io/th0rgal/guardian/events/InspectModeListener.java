@@ -93,21 +93,29 @@ public class InspectModeListener implements Listener {
             return;
         GuardianPlayer player = playersManager.getPlayer(event.getPlayer());
         String type = item.getItemMeta().getPersistentDataContainer().get(key, PersistentDataType.STRING);
-        if (type != null && type.equals("teleport") && player.isInspecting()) {
-            InspectData data = player.getInspectData();
-            event.setCancelled(true);
-            List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-            players.remove(player);
-            if (players.size() == 0)
-                player.message(Message.NOT_ENOUGH_PLAYERS);
-            else {
-                Player target = players.get(random.nextInt(players.size()));
-                player.setInspectData(target,
-                        target.getLocation(),
-                        data.inventory(),
-                        data.gameMode(),
-                        data.invisible());
-                player.asBukkitPlayer().teleport(target.getLocation());
+        if (type != null && player.isInspecting()) {
+            switch (type) {
+                case "teleport" -> {
+                    InspectData data = player.getInspectData();
+                    event.setCancelled(true);
+                    List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+                    players.remove(player);
+                    if (players.size() == 0)
+                        player.message(Message.NOT_ENOUGH_PLAYERS);
+                    else {
+                        Player target = players.get(random.nextInt(players.size()));
+                        player.setInspectData(target,
+                                target.getLocation(),
+                                data.inventory(),
+                                data.gameMode(),
+                                data.invisible());
+                        player.asBukkitPlayer().teleport(target.getLocation());
+                    }
+                }
+                case "exit" -> {
+                    player.leaveInspectMode();
+                    event.setCancelled(true);
+                }
             }
         }
     }

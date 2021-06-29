@@ -22,9 +22,9 @@ player_frozen = "you have been successfully frozen"
 player_unfrozen = "you have been successfully unfrozen"
 target_killed = "the target player has been successfully killed"
 target_banned = "the target player has been successfully banned"
-journal_subscribed = "you were successfully registered to the <name> journal"
+journal_subscribed = "you registered to the <name> journal"
 journal_already_subscribed = "you were already registered to the <name> journal"
-journal_unsubscribed = "you were successfully unregistered from the <name> journal"
+journal_unsubscribed = "you unregistered from the <name> journal"
 journal_not_subscribed = "you were not registered to the <name> journal"
 
 [items]
@@ -33,6 +33,7 @@ freeze_item_name = "<#4fcdf0>Freeze the targeted player"
 kill_item_name = "<#e36659>Kill the targeted player"
 ban_item_name = "<#805753>Ban the targeted player"
 info_item_name = "<#c2c9ab>Show targeted player stats"
+exit_item_name = "<#8a76db>Exit inspect mode"
 
 [infoview]
 title = "<gradient:#F5867B:#FAC987><bold><player> info</gradient><reset>"
