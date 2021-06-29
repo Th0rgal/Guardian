@@ -50,7 +50,8 @@ public class PunishersManager {
                 continue;
 
             if (action.hasLog())
-                this.journal.log(action.getLog(), MessageColor.WARNING, "player", player.asBukkitPlayer().getName());
+                this.journal.log(GuardianJournal.Type.PUNISHER, action.getLog(),
+                        MessageColor.WARNING, "player", player.asBukkitPlayer().getName());
 
             if (action.hasCommands())
                 for (String command : action.getCommands())
