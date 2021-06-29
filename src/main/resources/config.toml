@@ -2,5 +2,6 @@
 # Name of a language file, english.toml by default
 language = "english"
 
-[logger]
+[journal]
+# should Guardian save journal logs?
 save = true
