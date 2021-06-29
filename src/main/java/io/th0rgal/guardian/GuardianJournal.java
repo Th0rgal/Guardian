@@ -52,13 +52,13 @@ public class GuardianJournal {
 
     public void log(Type journalType, String message, MessageColor color, String... placeholders) {
         Component component = lang.getRich(Message.JOURNAL_PREFIX).color(color.get()).append(parser.parse(message, placeholders));
-        for (CommandSender subscriber : subscribers.get(journalType))
+        for (CommandSender subscriber : subscribers.getOrDefault(journalType, new HashSet<>()))
             adventure.sender(subscriber).sendMessage(component);
     }
 
     public void log(Type journalType, Message message, String... placeholders) {
         Component component = lang.getRich(Message.JOURNAL_PREFIX).append(lang.getRich(message, placeholders));
-        for (CommandSender subscriber : subscribers.get(journalType))
+        for (CommandSender subscriber : subscribers.getOrDefault(journalType, new HashSet<>()))
             adventure.sender(subscriber).sendMessage(component);
     }
 }
