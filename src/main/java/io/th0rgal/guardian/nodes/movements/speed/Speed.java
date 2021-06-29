@@ -129,7 +129,8 @@ public class Speed extends Node implements Listener {
             punish(guardianPlayer,
                     serializedPunisher.name(),
                     serializedPunisher.addition(),
-                    serializedPunisher.multiply());
+                    serializedPunisher.multiply(),
+                    String.format("{ speed: %.2f, maxSpeed: %.2f }", speed, maxSpeed));
         }
 
     }

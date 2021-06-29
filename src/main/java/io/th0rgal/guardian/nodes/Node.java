@@ -6,6 +6,8 @@ import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.SerializedPunisherTrigger;
+import io.th0rgal.guardian.storage.config.language.Message;
+import io.th0rgal.guardian.storage.config.language.MessageColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -46,8 +48,14 @@ public abstract class Node {
         return player.isDisabled(this.getClass());
     }
 
-    protected void punish(GuardianPlayer player, String name, double addition, double multiply) {
+    protected void punish(GuardianPlayer player, String name, double addition, double multiply, String data) {
+        journal.log(GuardianJournal.Type.NODE, Message.NODE_LOG, "player",
+                player.asBukkitPlayer().getDisplayName(), "node", this.getClass().getSimpleName(), "data", data);
         punishersManager.punish(player, name, addition, multiply);
+    }
+
+    protected void punish(GuardianPlayer player, String name, double addition, double multiply) {
+        punish(player, name, addition, multiply, "{}");
     }
 
     protected void applySerializedTrigger(GuardianPlayer player, List<SerializedPunisherTrigger> triggers, double value) {

@@ -1,8 +1,19 @@
 [plugin]
 prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
 journal_prefix = "<gradient:#F5867B:#FAC987>Journal</gradient> <#282B3F>| "
+node_log = """<hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            <player>><color:#b5e3eb><b><player></b></color></click></hover> fired <node>: <data>"""
 
 [commands]
+help = """Available commands
+\"<gray>fill journal command\"><click:SUGGEST_COMMAND:/guardian journal ><#6f737d>/g \
+<#b8bbc2>journal <#fa8943>type <#43fa8c>enable</click></hover>  <#6f737d>»<#b8bbc2> subscribe to journal logs
+<hover:show_text:\"<gray>fill info command\"><click:SUGGEST_COMMAND:/guardian info ><#6f737d>/g \
+<#b8bbc2>info <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> show player informations
+<hover:show_text:\"<gray>fill freeze command\"><click:SUGGEST_COMMAND:/guardian freeze ><#6f737d>/g \
+<#b8bbc2>freeze <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> toggle player freeze
+<hover:show_text:\"<gray>fill inspect command\"><click:SUGGEST_COMMAND:/guardian inspect><#6f737d>/g \
+<#b8bbc2>inspect</click></hover>   <#6f737d>»<#b8bbc2> toggle inspect mode"""
 not_a_player = "you must be a player to use this command"
 not_enough_players = "there are not enough players connected to the server"
 target_frozen = "the target player has been successfully frozen"

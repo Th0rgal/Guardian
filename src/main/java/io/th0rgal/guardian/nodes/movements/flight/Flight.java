@@ -89,7 +89,8 @@ public class Flight extends Node implements Listener {
                 punish(guardianPlayer,
                         serializedPunisher.name(),
                         serializedPunisher.addition(),
-                        serializedPunisher.multiply());
+                        serializedPunisher.multiply(),
+                        String.format("{ ySpeed: %.2f, speed: %.2f }", speed, ySpeed));
             }
         }
     }

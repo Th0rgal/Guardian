@@ -6,13 +6,13 @@ decrease = 0.2 # decrease every minute
 threshold = 2.0
 concurrent = false # will not be activated if a higher check is
 log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
-            Uxon><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
+            <player>><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[combat.action]]
 threshold = 5.0
 concurrent = true # will be activated even if a higher check is
 log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
-            Uxon><color:#f39c12><bold><player></bold></color></click></hover> has an extremely suspicious behavior"""
+            <player>><color:#f39c12><bold><player></bold></color></click></hover> is extremely suspicious"""
 
 [[combat.action]]
 threshold = 25.0
@@ -29,13 +29,13 @@ decrease = 1.0 # decrease every minute
 threshold = 1.0
 concurrent = false # will not be activated if a higher check is
 log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
-            Uxon><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
+            <player>><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[movement.action]]
 threshold = 10.0
 concurrent = true # will be activated even if a higher check is
 log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
-            Uxon><color:#f39c12><bold><player></bold></color></click></hover> has an extremely suspicious behavior"""
+            <player>><color:#f39c12><bold><player></bold></color></click></hover> is extremely suspicious"""
 
 [[movement.action]]
 threshold = 30.0

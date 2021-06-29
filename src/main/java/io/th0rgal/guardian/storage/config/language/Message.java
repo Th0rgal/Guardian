@@ -6,7 +6,9 @@ public enum Message {
 
     PREFIX("plugin.prefix"),
     JOURNAL_PREFIX("plugin.journal_prefix"),
+    NODE_LOG("plugin.node_log"),
 
+    HELP("commands.help"),
     NOT_A_PLAYER("commands.not_a_player", MessageColor.SEVERE),
     NOT_ENOUGH_PLAYERS("commands.not_enough_players", MessageColor.SEVERE),
     TARGET_FROZEN("commands.target_frozen", MessageColor.SUCCESS),
