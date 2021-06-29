@@ -3,13 +3,13 @@
 decrease = 0.2 # decrease every minute
 
 [[combat.action]]
-threshold = 2.0
+threshold = 5.0
 concurrent = false # will not be activated if a higher check is
 log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
             <player>><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[combat.action]]
-threshold = 5.0
+threshold = 8.0
 concurrent = true # will be activated even if a higher check is
 log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
             <player>><color:#f39c12><bold><player></bold></color></click></hover> is extremely suspicious"""
@@ -26,19 +26,19 @@ commands = [
 decrease = 1.0 # decrease every minute
 
 [[movement.action]]
-threshold = 1.0
+threshold = 5.0
 concurrent = false # will not be activated if a higher check is
 log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
             <player>><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[movement.action]]
-threshold = 10.0
+threshold = 15.0
 concurrent = true # will be activated even if a higher check is
 log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
             <player>><color:#f39c12><bold><player></bold></color></click></hover> is extremely suspicious"""
 
 [[movement.action]]
-threshold = 30.0
+threshold = 40.0
 concurrent = true # will be activated even if a higher check is
 commands = [
     "ban <player> 'You have been automatically banned for cheating'"
