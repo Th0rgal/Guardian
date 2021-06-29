@@ -15,7 +15,6 @@ public record FreezePlayer(BukkitAudiences adventure, LanguageConfiguration lang
 
     public CommandAPICommand getCommand() {
         return new CommandAPICommand("freeze")
-                .withAliases("unfreeze")
                 .withPermission(Permission.USE_COMMAND_FREEZE.toString())
                 .withArguments(new PlayerArgument("player"))
                 .executes((sender, args) -> {

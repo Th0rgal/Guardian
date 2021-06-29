@@ -5,12 +5,14 @@ decrease = 0.2 # decrease every minute
 [[combat.action]]
 threshold = 2.0
 concurrent = false # will not be activated if a higher check is
-log = "combat: <click:run_command:/guardian inspect <player>><color:#f39c12><bold><player></bold></color></click> is suspicious"
+log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            Uxon><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[combat.action]]
 threshold = 5.0
 concurrent = true # will be activated even if a higher check is
-log = "combat: <click:run_command:/guardian inspect <player>><color:#f39c12><bold><player></bold></color></click> has an extremely suspicious behavior"
+log = """combat: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            Uxon><color:#f39c12><bold><player></bold></color></click></hover> has an extremely suspicious behavior"""
 
 [[combat.action]]
 threshold = 25.0
@@ -26,12 +28,14 @@ decrease = 1.0 # decrease every minute
 [[movement.action]]
 threshold = 1.0
 concurrent = false # will not be activated if a higher check is
-log = "movement: <click:run_command:/guardian inspect <player>><color:#f39c12><bold><player></bold></color></click> is suspicious"
+log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            Uxon><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
 
 [[movement.action]]
 threshold = 10.0
 concurrent = true # will be activated even if a higher check is
-log = "movement: <click:run_command:/guardian inspect <player>><color:#f39c12><bold><player></bold></color></click> has an extremely suspicious behavior"
+log = """movement: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            Uxon><color:#f39c12><bold><player></bold></color></click></hover> has an extremely suspicious behavior"""
 
 [[movement.action]]
 threshold = 30.0

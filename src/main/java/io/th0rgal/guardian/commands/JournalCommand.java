@@ -89,7 +89,6 @@ public record JournalCommand(GuardianJournal journal, BukkitAudiences adventure,
 
     private CommandAPICommand getAllToggleCommand() {
         return new CommandAPICommand("all")
-                .withAliases("logs")
                 .withPermission(Permission.USE_COMMAND_JOURNAL.toString())
                 .executes((sender, args) -> {
                     handleToggleCommand(GuardianJournal.Type.PUNISHER, "punisher", sender);

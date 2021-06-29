@@ -26,7 +26,7 @@ public class GuardianPlugin extends JavaPlugin {
 
     public void onEnable() {
         CommandAPI.onEnable(this);
-        MiniMessage parser = MiniMessage.markdown();
+        MiniMessage parser = MiniMessage.get();
         MainConfig config = new MainConfig(this, "config");
         LanguageConfiguration lang = new LanguageConfiguration(this, parser,
                 "languages/" + config.getString(Config.SETTINGS_LANGUAGE));
