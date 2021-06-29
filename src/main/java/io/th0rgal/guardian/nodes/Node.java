@@ -54,17 +54,13 @@ public abstract class Node {
         punishersManager.punish(player, name, addition, multiply);
     }
 
-    protected void punish(GuardianPlayer player, String name, double addition, double multiply) {
-        punish(player, name, addition, multiply, "{}");
-    }
-
-    protected void applySerializedTrigger(GuardianPlayer player, List<SerializedPunisherTrigger> triggers, double value) {
+    protected void applySerializedTrigger(GuardianPlayer player, List<SerializedPunisherTrigger> triggers, double value, String fieldName) {
         boolean triggered = false;
         for (SerializedPunisherTrigger trigger : triggers) {
             if ((triggered && !trigger.concurrent()) || value < trigger.trigger())
                 continue;
             triggered = true;
-            punish(player, trigger.name(), trigger.addition(), trigger.multiply());
+            punish(player, trigger.name(), trigger.addition(), trigger.multiply(), String.format("{ %s: %.2f }", fieldName, value));
         }
     }
 }

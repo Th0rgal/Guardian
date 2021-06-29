@@ -64,6 +64,6 @@ public class HighCPS extends Node implements Listener {
             player.setData(this.getClass(), cpsQueue);
         }
         cpsQueue.update();
-        applySerializedTrigger(player, triggers, cpsQueue.getCPS());
+        applySerializedTrigger(player, triggers, cpsQueue.getCPS(), "cps");
     }
 }

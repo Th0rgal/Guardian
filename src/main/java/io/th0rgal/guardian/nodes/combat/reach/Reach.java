@@ -57,6 +57,6 @@ public class Reach extends Node implements Listener {
             return;
         GuardianPlayer guardianPlayer = playersManager.getPlayer(player);
         if (!isDisabledFor(guardianPlayer))
-            applySerializedTrigger(guardianPlayer, triggers, player.getLocation().distance(event.getEntity().getLocation()));
+            applySerializedTrigger(guardianPlayer, triggers, player.getLocation().distance(event.getEntity().getLocation()), "reach");
     }
 }
