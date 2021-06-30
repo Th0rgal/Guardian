@@ -8,13 +8,13 @@ historic = 10 # amount of clicks used to calculate the CPS
 [[highcps.punishers]]
 punisher = "combat"
 concurrent = false # will not be activated if a higher check is
-min_cps = 12.0
+min_cps = 14.0
 add = 1.0
 
 [[highcps.punishers]]
 punisher = "combat"
 concurrent = false
-min_cps = 14.0
+min_cps = 16.0
 add = 2.0
 
 [[highcps.punishers]]
