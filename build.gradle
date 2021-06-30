@@ -45,6 +45,7 @@ processResources {
 
 shadowJar {
     relocate "org.tomlj", "io.th0rgal.guardian.libs.tomlj"
+    relocate "net.kyori", "io.th0rgal.guardian.libs.kyori"
     /*
     minimize {
         exclude("io.th0rgal.guardian.api.*")
