@@ -6,7 +6,7 @@ node_log = """<hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:
 
 [commands]
 help = """Available commands
-\"<gray>fill journal command\"><click:SUGGEST_COMMAND:/guardian journal ><#6f737d>/g \
+<hover:show_text:\"<gray>fill journal command\"><click:SUGGEST_COMMAND:/guardian journal ><#6f737d>/g \
 <#b8bbc2>journal <#fa8943>type <#43fa8c>enable</click></hover>  <#6f737d>»<#b8bbc2> subscribe to journal logs
 <hover:show_text:\"<gray>fill info command\"><click:SUGGEST_COMMAND:/guardian info ><#6f737d>/g \
 <#b8bbc2>info <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> show player informations
