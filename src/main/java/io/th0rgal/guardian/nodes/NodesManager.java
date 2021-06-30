@@ -1,6 +1,7 @@
 package io.th0rgal.guardian.nodes;
 
 import io.th0rgal.guardian.GuardianJournal;
+import io.th0rgal.guardian.nodes.misc.Inventory;
 import io.th0rgal.guardian.nodes.movements.flight.Flight;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.config.Configuration;
@@ -39,6 +40,8 @@ public class NodesManager {
 
         registerNode(HighCPS::new, "highcps");
         registerNode(Reach::new, "reach");
+
+        registerNode(Inventory::new, "inventory");
 
         registerNode(Flight::new, "flight");
         registerNode(Speed::new, "speed");

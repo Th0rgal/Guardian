@@ -60,6 +60,19 @@ min_reach = 5.0
 add = 10.0
 
 
+# MISC
+[inventory]
+enabled = true
+walk_delay = 50 # max delay since last move event to be considered as walking
+forbid_walking = true
+forbid_sneaking = true
+
+[inventory.punisher]
+punisher = "misc"
+concurrent = true # will be activated even if a higher check is
+add = 3.0
+multiply = 1.25
+
 # MOVEMENTS
 
 # This node will analyze player movements to detect flyhack

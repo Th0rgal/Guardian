@@ -21,6 +21,18 @@ commands = [
     "ban <player> 'You have been automatically banned for cheating'"
 ]
 
+
+[misc]
+
+decrease = 0.1 # decrease every minute
+
+[[misc.action]]
+threshold = 5.0
+concurrent = true # will not be activated if a higher check is
+log = """misc: <hover:show_text:\"<#f39c12>click to inspect\"><click:run_command:/guardian inspect \
+            <player>><color:#f39c12><bold><player></bold></color></click></hover> is suspicious"""
+
+
 [movement]
 
 decrease = 1.0 # decrease every minute
