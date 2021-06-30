@@ -7,8 +7,6 @@ import io.th0rgal.guardian.storage.config.NodeConfig;
 import io.th0rgal.guardian.events.PlayersManager;
 import io.th0rgal.guardian.punishers.SerializedPunisherTrigger;
 import io.th0rgal.guardian.storage.config.language.Message;
-import io.th0rgal.guardian.storage.config.language.MessageColor;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -60,7 +58,7 @@ public abstract class Node {
             if ((triggered && !trigger.concurrent()) || value < trigger.trigger())
                 continue;
             triggered = true;
-            punish(player, trigger.name(), trigger.addition(), trigger.multiply(), String.format("{ %s: %.2f }", fieldName, value));
+            punish(player, trigger.name(), trigger.addition(), trigger.multiply(), String.format("%s: %.2f", fieldName, value));
         }
     }
 }

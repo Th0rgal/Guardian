@@ -59,7 +59,7 @@ public class Inventory extends Node implements Listener {
                     serializedPunisher.name(),
                     serializedPunisher.addition(),
                     serializedPunisher.multiply(),
-                    String.format("{ walked: %b, sneaked: %b }", walked, sneaked));
+                    String.format("walked: %b, sneaked: %b", walked, sneaked));
     }
 
     @EventHandler

@@ -90,7 +90,7 @@ public class Flight extends Node implements Listener {
                         serializedPunisher.name(),
                         serializedPunisher.addition(),
                         serializedPunisher.multiply(),
-                        String.format("{ ySpeed: %.2f, speed: %.2f }", speed, ySpeed));
+                        String.format("ySpeed: %.2f, speed: %.2f", speed, ySpeed));
             }
         }
     }
