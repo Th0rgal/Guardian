@@ -64,9 +64,12 @@ public class HealthBarNode extends Node implements Listener {
                                 || entity.getPassengers().contains(player))
                             return;
                         for (WrappedWatchableObject watch : packet.getWatchableCollectionModifier().read(0))
+                            if (watch.getIndex() == 9 && (float) watch.getValue() != 0f){
+                                double value = ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH)
+                                        .getValue();
+                                watch.setValue(value);
+                            }
 
-                            if (watch.getIndex() == 9 && (float) watch.getValue() != 0f)
-                                watch.setValue((float) ((LivingEntity) entity).getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                     }
                 });
     }
