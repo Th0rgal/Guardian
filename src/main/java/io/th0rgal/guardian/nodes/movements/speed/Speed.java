@@ -97,8 +97,14 @@ public class Speed extends Node implements Listener {
         if (!onGround) {
             maxSpeed *= 1.3;
         }
-        if (location.getBlock().getType() == Material.DIRT_PATH)
-            maxSpeed *= 1.6;
+        if (Bukkit.getVersion().contains("1.16")) {
+            if (location.getBlock().getType() == Material.getMaterial("GRASS_PATH"))
+                maxSpeed *= 1.6;
+        } else {
+            if (location.getBlock().getType() == Material.getMaterial("DIRT_PATH"))
+                maxSpeed *= 1.6;
+        }
+
 
         if (isOnIce(player)) {
             speedData.setOnIce();
