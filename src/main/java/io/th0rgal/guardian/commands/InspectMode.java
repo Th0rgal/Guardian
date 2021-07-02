@@ -43,13 +43,14 @@ public class InspectMode {
                 .hexColors()
                 .useUnusualXRepeatedCharacterHexFormat()
                 .build();
+        String exitMaterial = Bukkit.getVersion().contains("1.16") ? "BARRIER" : "AMETHYST_SHARD";
         this.inspectInventory = new ItemStack[]{
                 getItem(Material.ENDER_EYE, Message.TELEPORT_ITEM_NAME, "teleport"),
                 getItem(Material.TRIDENT, Message.FREEZE_ITEM_NAME, "freeze"),
                 getItem(Material.NETHERITE_SWORD, Message.KILL_ITEM_NAME, "kill"),
                 getItem(Material.NETHERITE_AXE, Message.BAN_ITEM_NAME, "ban"),
                 getItem(Material.GLOBE_BANNER_PATTERN, Message.INFO_ITEM_NAME, "info"),
-                getItem(Material.AMETHYST_SHARD, Message.EXIT_ITEM_NAME, "exit")
+                getItem(Material.getMaterial(exitMaterial), Message.EXIT_ITEM_NAME, "exit")
         };
         Bukkit.getPluginManager().registerEvents(
                 new InspectModeListener(playersManager, key, infoPlayer),
