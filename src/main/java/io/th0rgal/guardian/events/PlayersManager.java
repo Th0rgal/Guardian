@@ -6,6 +6,7 @@ import com.comphenix.protocol.events.ListenerPriority;
 import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import io.th0rgal.guardian.GuardianPlayer;
+import io.th0rgal.guardian.storage.PunishersDatabase;
 import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.punishers.PunishersManager;
 import io.th0rgal.guardian.storage.Database;
@@ -29,13 +30,13 @@ import java.util.UUID;
 public class PlayersManager implements Listener {
 
     private final Map<UUID, GuardianPlayer> players = new HashMap<>();
-    private final Database database;
+    private final PunishersDatabase database;
     private final PunishersManager punisher;
     private final BukkitAudiences adventure;
     private final LanguageConfiguration lang;
 
     public PlayersManager(JavaPlugin plugin, PunishersManager punisher, BukkitAudiences adventure, LanguageConfiguration lang) {
-        this.database = new SQLite(plugin, punisher.getPunishers(), "punishers");
+        this.database = new PunishersDatabase(plugin, punisher.getPunishers(), "punishers");
         database.load();
         this.punisher = punisher;
         this.adventure = adventure;
@@ -68,8 +69,7 @@ public class PlayersManager implements Listener {
             guardianPlayer.switchFreeze();
         if (guardianPlayer.isInspecting())
             guardianPlayer.leaveInspectMode();
-        for (String punisher : punisher.getPunishers())
-            database.setScore(player.getUniqueId(), punisher, guardianPlayer.getScore(punisher));
+        database.setScores(player.getUniqueId(), guardianPlayer.getScores());
         players.remove(player.getUniqueId());
     }
 
