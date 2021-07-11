@@ -95,11 +95,10 @@ public class Flight extends Node implements Listener {
         }
     }
 
-    @SuppressWarnings("deprecation")
     private boolean isNotSolid(Material material) {
         List<Material> airs = Arrays.asList(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR,
                 Material.SNOW);
-        return airs.contains(material) || material.isAir() || material.isTransparent();
+        return airs.contains(material) || material.isAir() || !material.isSolid();
     }
 
     private boolean nonAirNear(Location location) {
