@@ -3,30 +3,32 @@ package io.th0rgal.guardian.storage;
 import io.th0rgal.guardian.exceptions.ExceptionHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
-public class PunishersDatabase extends SQLite {
+public class JournalDatabase extends SQLite {
     private final String name;
-    private final Set<String> punishers;
+    private final String[] journals;
 
-    public PunishersDatabase(JavaPlugin plugin, Set<String> punishers, String name) {
+    public JournalDatabase(JavaPlugin plugin, String name, String... journals) {
         super(plugin, name);
-        this.punishers = punishers;
         this.name = name;
+        this.journals = journals;
     }
 
     public void load() {
-        StringBuilder tokensTable = new StringBuilder("CREATE TABLE IF NOT EXISTS " + name + " (`uuid` varchar(32) NOT NULL,");
-        for (String punisher : punishers)
-            tokensTable.append("`").append(punisher).append("` FLOAT(24) NOT NULL default 0,");
-        tokensTable.append("PRIMARY KEY (`uuid`));");
+        StringBuilder tokensTable = new StringBuilder("CREATE TABLE IF NOT EXISTS " + name + " (`uuid` varchar(32) NOT NULL");
+        for (String journal : journals)
+            tokensTable.append(", `").append(journal).append("` BOOLEAN DEFAULT(FALSE)");
+        tokensTable.append(")");
         load(tokensTable.toString());
     }
 
-    public Double getScore(UUID uuid, String punisher) {
+    public boolean isSubscribed(UUID uuid, String journal) {
         Connection connection = null;
         PreparedStatement prepareStatement = null;
         ResultSet resultSet;
@@ -36,24 +38,24 @@ public class PunishersDatabase extends SQLite {
             resultSet = prepareStatement.executeQuery();
             while (resultSet.next())
                 if (resultSet.getString("uuid").equalsIgnoreCase(uuid.toString()))
-                    return resultSet.getDouble(punisher);
+                    return resultSet.getBoolean(journal);
         } catch (SQLException exception) {
             new ExceptionHandler(exception).fire(plugin.getLogger());
         } finally {
             close(prepareStatement, connection);
         }
-        return 0D;
+        return false;
     }
 
-    public void setScores(UUID uuid, Map<String, Double> punishersScore) {
+    public void subscribes(UUID uuid, Map<String, Boolean> journals) {
         try (Connection connection = getSQLConnection(); PreparedStatement prepareStatement =
                 connection.prepareStatement("REPLACE INTO " + table
-                        + " (uuid," + String.join(", ", punishersScore.keySet())
-                        + ") VALUES(?" + ",?".repeat(punishersScore.size()) + ")")) {
+                        + " (uuid," + String.join(", ", journals.keySet())
+                        + ") VALUES(?" + ",?".repeat(journals.size()) + ")")) {
             prepareStatement.setString(1, uuid.toString());
             int i = 2;
-            for (Double score : punishersScore.values())
-                prepareStatement.setDouble(i++, score);
+            for (Boolean enabled : journals.values())
+                prepareStatement.setBoolean(i++, enabled);
             prepareStatement.executeUpdate();
         } catch (SQLException exception) {
             new ExceptionHandler(exception).fire(plugin.getLogger());

@@ -34,7 +34,7 @@ public class GuardianPlugin extends JavaPlugin {
         BukkitAudiences adventure = BukkitAudiences.create(this);
         guardianJournal = new GuardianJournal(this, adventure, lang, parser, config.getBoolean(Config.SAVE_JOURNAL));
         PunishersManager punisher = new PunishersManager(this, new Configuration(this, "punishers"), guardianJournal);
-        playersManager = new PlayersManager(this, punisher, adventure, lang);
+        playersManager = new PlayersManager(this, punisher, guardianJournal, adventure, lang);
         new CommandsManager(this, guardianJournal, adventure, lang, playersManager).register();
         new NodesManager(this, guardianJournal, new Configuration(this, "nodes"), playersManager, punisher).enableAll();
     }

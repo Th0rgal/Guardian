@@ -1,6 +1,7 @@
 package io.th0rgal.guardian;
 
 import io.th0rgal.guardian.exceptions.ExceptionHandler;
+import io.th0rgal.guardian.storage.JournalDatabase;
 import io.th0rgal.guardian.storage.config.language.LanguageConfiguration;
 import io.th0rgal.guardian.storage.config.language.Message;
 import io.th0rgal.guardian.storage.config.language.MessageColor;
@@ -9,6 +10,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
