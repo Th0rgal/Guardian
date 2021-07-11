@@ -75,8 +75,8 @@ public class Flight extends Node implements Listener {
             return;
         }
 
-        if (isAir(blockLocation.getBlock().getType()) && isAir(supportLocation.getBlock().getType())
-                && isAir(from.clone().add(0, -1, 0).getBlock().getType())) {
+        if (isNotSolid(blockLocation.getBlock().getType()) && isNotSolid(supportLocation.getBlock().getType())
+                && nonAirNear(from.clone().add(0, -1, 0))) {
             Vector move = event.getTo().toVector().subtract(from.toVector());
             double ySpeed = move.clone().setX(0).setZ(0).length();
             double speed = move.length();
@@ -95,9 +95,11 @@ public class Flight extends Node implements Listener {
         }
     }
 
-    private boolean isAir(Material material) {
-        List<Material> airs = Arrays.asList(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR);
-        return airs.contains(material);
+    @SuppressWarnings("deprecation")
+    private boolean isNotSolid(Material material) {
+        List<Material> airs = Arrays.asList(Material.AIR, Material.CAVE_AIR, Material.VOID_AIR,
+                Material.SNOW);
+        return airs.contains(material) || material.isAir() || material.isTransparent();
     }
 
     private boolean nonAirNear(Location location) {
@@ -105,7 +107,7 @@ public class Flight extends Node implements Listener {
             for (int y = -1; y <= 1; y++)
                 for (int z = -1; z <= 1; z++) {
                     Block block = location.getBlock().getRelative(x, y, z);
-                    if (!isAir(block.getType()))
+                    if (!isNotSolid(block.getType()))
                         return true;
                 }
         return false;
