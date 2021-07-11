@@ -1,0 +1,40 @@
+[plugin]
+prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
+journal_prefix = "<gradient:#F5867B:#FAC987>Journal</gradient> <#282B3F>| "
+node_log = """<hover:show_text:\"<#f39c12>clique pour inspecter\"><click:run_command:/guardian inspect \
+            <player>><color:#b5e3eb><b><player></b></color></click></hover> a activé <node>: <data>"""
+
+[commands]
+help = """Commandes disponibles
+<hover:show_text:\"<gray>préremplir la commande\"><click:SUGGEST_COMMAND:/guardian journal ><#6f737d>/g \
+<#b8bbc2>journal <#fa8943>type <#43fa8c>enable</click></hover>  <#6f737d>»<#b8bbc2> s'inscrire à un journal
+<hover:show_text:\"<gray>préremplir la commande\"><click:SUGGEST_COMMAND:/guardian info ><#6f737d>/g \
+<#b8bbc2>info <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> afficher les informations du joueur
+<hover:show_text:\"<gray>préremplir la commande\"><click:SUGGEST_COMMAND:/guardian freeze ><#6f737d>/g \
+<#b8bbc2>freeze <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> changer le mode gel du joueur
+<hover:show_text:\"<gray>préremplir la commande\"><click:SUGGEST_COMMAND:/guardian inspect><#6f737d>/g \
+<#b8bbc2>inspect</click></hover>   <#6f737d>»<#b8bbc2> basculer votre mode d'inspection"""
+not_a_player = "vous devez être un joueur pour utiliser cette commande"
+not_enough_players = "il n'y a pas assez de joueurs connectés sur le serveur"
+target_frozen = "le joueur sélectionné a bien été gelé"
+target_unfrozen = "le joueur sélectionné a bien été dégelé"
+player_frozen = "vous avez été gelé"
+player_unfrozen = "vous avez été dégelé"
+target_killed = "le joueur cible a été tué avec succès"
+target_banned = "le joueur cible a été banni avec succès"
+journal_subscribed = "vous vous êtes inscrit au journal <name>"
+journal_already_subscribed = "vous êtiez déjà inscrit au journal <name>"
+journal_unsubscribed = "vous vous êtes désinscrit du journal <name>"
+journal_not_subscribed = "vous n'êtiez pas inscrit au journal <name>"
+
+[items]
+teleport_item_name = "<#47b594>Téléportation aléatoire à un joueur"
+freeze_item_name = "<#4fcdf0>Geler le joueur cible"
+kill_item_name = "<#e36659>Tuer le joueur cible"
+ban_item_name = "<#805753>Bannir le joueur cible"
+info_item_name = "<#c2c9ab>Afficher les statistiques du joueur cible"
+exit_item_name = "<#8a76db>Quitter le mode d'inspection"
+
+[infoview]
+title = "<gradient:#F5867B:#FAC987><bold>info sur <player></gradient><reset>"
+punisher_line = "<#6B6B6B><underlined><punisher></underlined>: <#5C5C5C><score>"
