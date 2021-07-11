@@ -1,0 +1,40 @@
+[plugin]
+prefix = "<gradient:#F5867B:#FAC987>Guardian</gradient> <#282B3F>| "
+journal_prefix = "<gradient:#F5867B:#FAC987>Arşiv</gradient> <#282B3F>| "
+node_log = """<hover:show_text:\"<#f39c12>denetlemek için tıkla\"><click:run_command:/guardian inspect \
+            <player>><color:#b5e3eb><b><player></b></color></click></hover> fired <node>: <data>"""
+
+[commands]
+help = """Available commands
+<hover:show_text:\"<gray>fill journal command\"><click:SUGGEST_COMMAND:/guardian journal ><#6f737d>/g \
+<#b8bbc2>journal <#fa8943>type <#43fa8c>enable</click></hover>  <#6f737d>»<#b8bbc2> subscribe to journal logs
+<hover:show_text:\"<gray>fill info command\"><click:SUGGEST_COMMAND:/guardian info ><#6f737d>/g \
+<#b8bbc2>info <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> show player informations
+<hover:show_text:\"<gray>fill freeze command\"><click:SUGGEST_COMMAND:/guardian freeze ><#6f737d>/g \
+<#b8bbc2>freeze <#43c9fa>player</click></hover>  <#6f737d>»<#b8bbc2> toggle player freeze
+<hover:show_text:\"<gray>fill inspect command\"><click:SUGGEST_COMMAND:/guardian inspect><#6f737d>/g \
+<#b8bbc2>inspect</click></hover>   <#6f737d>»<#b8bbc2> toggle inspect mode"""
+not_a_player = "bu komudu kullanmak için oyuncu olmalısın"
+not_enough_players = "sunucuda yeteri kadar oyuncu yok"
+target_frozen = "hedef oyuncu başarıyla donduruldu"
+target_unfrozen = "hedef oyuncunun dondurulması başarıyla kaldırıldı"
+player_frozen = "başarıyla donduruldun"
+player_unfrozen = "başarıyla dondurulman kaldırıldı"
+target_killed = "hedef oyuncu başarıyla öldürüldü"
+target_banned = "hedef oyuncu başarıyla yasaklandı"
+journal_subscribed = "başarıyla <name> adlı arşive kaydedildin"
+journal_already_subscribed = "zaten <name> adlı arşive kaydedildin"
+journal_unsubscribed = "<name> adlı dergiden kaydın silindi"
+journal_not_subscribed = "<name> adlı arşivde kayıtlı değildin"
+
+[items]
+teleport_item_name = "<#47b594>Oyuncuya rastgele ışınlanma"
+freeze_item_name = "<#4fcdf0>Hedef oyuncuyu dondur"
+kill_item_name = "<#e36659>Hedef oyuncuyu öldür"
+ban_item_name = "<805753>Hedef oyuncuyu yasakla"
+info_item_name = "<#c2c9ab>Hedef oyuncunun istatistiklerini göster"
+exit_item_name = "<#8a76db>Denetleme modundan çık"
+
+[infoview]
+title = "<gradient:#F5867B:#FAC987><bold><player> adlı oyuncunun bilgisi</gradient><reset>"
+punisher_line = "<#6B6B6B><underlined><punisher></underlined>: <#5C5C5C><score>"
