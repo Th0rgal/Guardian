@@ -31,7 +31,7 @@ dependencies {
     compileOnly group: "com.github.dmulloy2", name: "ProtocolLib", version: "4.6.0"
     implementation "org.bstats:bstats-bukkit:2.2.1"
     implementation "io.github.xtomlj:xtomlj:1.1.0"
-    implementation 'dev.jorel.CommandAPI:commandapi-shade:6.0.4'
+    implementation 'dev.jorel.CommandAPI:commandapi-shade:6.1.0'
     implementation "net.kyori:adventure-text-minimessage:4.1.0-SNAPSHOT"
     implementation "net.kyori:adventure-platform-bukkit:4.0.0-SNAPSHOT"
     implementation "net.kyori:adventure-text-serializer-plain:4.8.1"
